@@ -45,9 +45,9 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 
-# How PHP handle type conversion
+# How PHP handle type conversion 🙄
 
-also known as: "the silliness table"
+also known as "the silliness table"
 
 ![type juggling in PHP](./images/type-juggling-in-php.png)
 
@@ -57,13 +57,19 @@ source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20J
 
 ---
 
+# JavaScript Quirks 😆
+
+![type juggling in PHP](./images/type-juggling-in-javascript.png){width=60%}
+
+---
+
 # TypeScript is sooooo good
 
 - Code quality
 - Find bugs faster
 - Lower unit test count
 - Minimize security vulnerabilities
-- Avoid type confusion in runtime (wait, what 😮 ???)
+- Avoid type confusion in runtime <v-click>(wait, what 😮 ???)</v-click>
 
 <!--
 1. Code quality - TypeScript helps you think about the function signature, the returned value and so on
@@ -73,12 +79,16 @@ source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20J
 5. Avoid type confusion in runtime - TypeScript can catch a lot of type confusion bugs that would happen in runtime (REALLY??? 😮)
 -->
 
---- 
+---
+
 
 - What do you think about this TypeScript code?
 - Does this live up to your type safety expectations?
 
-```ts
+<div class="mt-12">
+</div>
+
+```ts {*}{lines:true}
 class UserController {
   public getUsers: RequestHandler = async (_req: Request, res: Response) => {
     const filterQuery: string = _req.query.filter as string || '';
@@ -96,12 +106,18 @@ class UserController {
 
 ---
 
-# Look at this error
+# Just an error...
 
 ![error](./images/error.png)
 
----
+<!--
+  What can you make up from this error log?
+-->
 
+---
+layout: two-cols
+layoutClass: gap-16
+---
 # Look at this silly vulnerability
 
 Can you spot the issue?
@@ -112,22 +128,36 @@ Can you spot the issue?
       if (!HCHARS.test(s)) {
         return s;
       }
-      return s.replace(AMP,'&amp;').replace(LT,'&lt;').replace(GT,'&gt;')
-              .replace(QUOT,'&quot;').replace(SQUOT, '&#39;');
+      return s.replace(AMP,'&amp;')
+        .replace(LT,'&lt;')
+        .replace(GT,'&gt;')
+        .replace(QUOT,'&quot;')
+        .replace(SQUOT, '&#39;');
     }
     return s;
   };
 ```
 
-- Found in `dustjs-linked`
-- When it was founded, it received 100,000 downloads a month
-- Let's appreciate that this was found as a blackbox test
+::right::
 
-![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
+<div class="mt-32">
+</div>
+
+<v-click>
+
+  - Found in `dustjs-linkedin`
+  - Downloaded 100,000 / month
+  - Let's appreciate that this was found as a blackbox test
+
+  ![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
+
+</v-click>
 
 ---
 
 # A "silly vulnerability" that paid $10k in bug bounty
+
+That's $10,000 for a string of text ;-)
 
 ![dustjs-linkedin bug bounty demo](./images/dustjs-linkedin-bug-bounty-demo.png)
 
@@ -139,21 +169,19 @@ https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_p
 
 # "TypeScript would have solved that"
 
----
+<div grid="~ cols-2 gap-4">
 
-# No, it wouldn't...
+  <div>
+    <div v-click="1">No, it wouldn't...</div>
+    <div v-click="3">No, it... wouldn't...</div>
+  </div>
 
----
+  <div>
+    <div v-click="2">Yes it would</div>
+    <div v-click="4">Yes yes it would! just use TypeScript!!</div>
+  </div>
 
-# Yes it would
-
----
-
-# No, it wouldn't...
-
---- 
-
-# Yes of course, just type the request!
+</div>
 
 ---
 
@@ -173,37 +201,61 @@ https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_p
 
 The premise: all you need is TypeScript. If you type everything, you're safe. TypeScript param types will be catching these.
 
-![typescript type checks for express route](./images/typescript-type-checks-for-express-route.png)
+<v-switch>
+  <template #1>
 
-Security promises:
-- Types are enforced at development time and through-out the code
-- "TypeScript CI failures prevent production deploys with errors"
+  ![typescript type checks for express route](./images/typescript-type-checks-for-express-route.png){width=90%}
+
+  </template>
+
+  <template #2>
+
+  Security promises:
+  - Types are enforced at development time and through-out the code
+  - "TypeScript CI failures prevent production deploys with errors"
+
+  </template>
+
+</v-switch>
 
 ---
 
 # TypeScript Security Fallacies
 
-My premise:
+Promises, Promises
 
-"TypeScript does not give any security guarantees. It's a tool to help you write better code, but it's not a security tool."
+<v-switch>
+  <template #1>
 
-My argument:
+> "TypeScript does not give any security guarantees. It's a tool to help you write better code, but it's not a security tool."
 
-"TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage."
+  </template>
+
+  <template #2>
+
+> "TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage."
+
+  </template>
+
+</v-switch>
 
 ---
 
 # TypeScript Security Bypass #1
 
-The route:
+Express + TypeScript
 
-```ts
+Start with a route definition:
+
+```ts {all}
 app.get("/users", userController.getUsers);
 ```
 
-The repository layer:
+<v-click>
 
-```ts
+Then the repository layer:
+
+```ts {all|2}
 export class UserRepository {
   async findAllAsync({ filter }: { filter?: string } = {}): Promise<User[]> {
     if (filter) {
@@ -214,6 +266,8 @@ export class UserRepository {
   }
 }
 ```
+
+</v-click>
 
 <!-- 
   We have a /users endpoint that serves as a REST API endpoint. It allows users to search for themselves and, in particular, to pass a filter string to match the user's name.
@@ -335,7 +389,7 @@ const serviceResponse = await userService.findAll({ filter: filterQuery });
 
 Let's do better!
 
---- 
+---
 
 # TypeScript Security Bypass #2
 
@@ -1173,7 +1227,7 @@ Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML D
 ---
 foo: bar
 dragPos:
-  square: 0,-26,0,0
+  square: 0,-145,0,0
 ---
 
 # Draggable Elements
@@ -1199,7 +1253,7 @@ Double-click on the draggable elements to edit their positions.
 </v-drag>
 ```
 
-<v-drag pos="663,206,261,_,-15">
+<v-drag pos="415,110,494,_,-15">
   <div text-center text-3xl border border-main rounded>
     Double-click me!
   </div>
@@ -1213,7 +1267,7 @@ Double-click on the draggable elements to edit their positions.
 <v-drag-arrow two-way />
 ```
 
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
+<v-drag-arrow pos="599,339,-557,-112" two-way op70 />
 
 ---
 src: ./pages/imported-slides.md
