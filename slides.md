@@ -166,20 +166,33 @@ https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_p
 -->
 
 ---
-
-# "TypeScript would have solved that"
+layout: quote
+---
 
 <div grid="~ cols-2 gap-4">
 
-  <div>
-    <div v-click="1">No, it wouldn't...</div>
-    <div v-click="3">No, it... wouldn't...</div>
+<div>
+  <div v-click="1">
+
+# No, it wouldn't...
   </div>
 
-  <div>
-    <div v-click="2">Yes it would</div>
-    <div v-click="4">Yes yes it would! just use TypeScript!!</div>
+<div v-click="3">
+
+# No, it... wouldn't...
   </div>
+</div>
+
+<div>
+<div v-click="2">
+
+# Yes it would
+</div>
+<div v-click="4">
+
+# Yes yes it would! just use TypeScript!!
+</div>
+</div>
 
 </div>
 
@@ -219,21 +232,23 @@ The premise: all you need is TypeScript. If you type everything, you're safe. Ty
 </v-switch>
 
 ---
-
-# TypeScript Security Fallacies
-
-Promises, Promises
+layout: quote
+---
 
 <v-switch>
-  <template #1>
+  <template #0>
 
-> "TypeScript does not give any security guarantees. It's a tool to help you write better code, but it's not a security tool."
+# "TypeScript does not give any security guarantees. It's a tool to help you write better code, but it's not a security tool."
+
+-TypeScript Security Fallacies
 
   </template>
 
-  <template #2>
+  <template #1>
 
-> "TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage."
+# "TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage."
+
+-TypeScript Security Fallacies
 
   </template>
 
