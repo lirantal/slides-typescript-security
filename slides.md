@@ -1,11 +1,13 @@
 ---
 # You can also start simply with 'default'
-theme: seriph
+theme: "neversink"
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
+# background: https://cover.sli.dev
 # some information about your slides (markdown enabled)
 title: Welcome to Slidev
+# colorSchema: light
+slide_info: false
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -15,34 +17,47 @@ info: |
 class: text-center
 # https://sli.dev/features/drawing
 drawings:
-  persist: false
+ persist: false
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
 ---
 
-# Welcome to Slidev
+# All You Need for Security is... TypeScript?
 
-Presentation slides for developers
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+<div class="">
+  <div class="text-3xl text-yellow-500">
+    Liran Tal
+  </div>
+  <span class="text-md text-yellow-500">
+    Developer Advocate at Snyk
+  </span>
 </div>
 
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
+<div class="flex flex-row justify-center gap-2 mt-8 align-middle">
+  <div class="rounded-full w-1/8 bg-white">
+    <img src="./images/lirantal.png" class="p-1 object-cover rounded-full" />
+  </div>
+
+  <div class="flex-col flex gap-4 justify-center text-center">
+    <a href="https://x.com/liran_tal" target="_blank">
+      <carbon:logo-twitter class="mr-1" /> @liran_tal
+    </a>
+    <a href="https://github.com/lirantal" target="_blank">
+      <carbon:logo-github class="mr-1" /> @lirantal
+    </a>
+  </div>
 </div>
+
+
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
+---
+color: red-light
 ---
 
 # How PHP handle type conversion 🙄
@@ -733,6 +748,7 @@ $ curl -X PUT -H 'Content-Type: application/json' \
           "notificationModeValue": true    \
     }'
 ```
+
 
 ---
 transition: fade-out
