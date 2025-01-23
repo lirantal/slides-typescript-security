@@ -1,26 +1,17 @@
 ---
-# You can also start simply with 'default'
 theme: "neversink"
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-# background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
-# colorSchema: light
+layout: cover
+title: "All You Need for Security is... TypeScript?"
 slide_info: false
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## A TypeScript Security Talk
+  by Liran Tal
 # apply unocss classes to the current slide
-class: text-center
+# class: text-center
 # https://sli.dev/features/drawing
 drawings:
  persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
 ---
 
@@ -50,17 +41,20 @@ mdc: true
   </div>
 </div>
 
-
-
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
 ---
-color: red-light
+layout: top-title
+align: l
 ---
 
+:: title ::
+
 # How PHP handle type conversion 🙄
+
+:: content ::
 
 also known as "the silliness table"
 
@@ -71,14 +65,33 @@ source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20J
 -->
 
 ---
+layout: top-title
+align: l
+---
+
+:: title ::
 
 # JavaScript Quirks 😆
 
-![type juggling in PHP](./images/type-juggling-in-javascript.png){width=60%}
+:: content ::
+
+<div class="flex items-center justify-center">
+
+<img src="./images/type-juggling-in-javascript.png" class="w-2/3" />
+
+</div>
 
 ---
+layout: side-title
+color: emerald-light
+align: rm-lm
+---
+
+:: title ::
 
 # TypeScript is sooooo good
+
+:: content ::
 
 - Code quality
 - Find bugs faster
@@ -95,15 +108,20 @@ source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20J
 -->
 
 ---
+layout: top-title
+align: l
+---
 
+:: title ::
 
-- What do you think about this TypeScript code?
-- Does this live up to your type safety expectations?
+A TypeScript-powered Express Route Definition
+
+:: content :: 
 
 <div class="mt-12">
 </div>
 
-```ts {*}{lines:true}
+```ts {*|2|3}{lines:true}
 class UserController {
   public getUsers: RequestHandler = async (_req: Request, res: Response) => {
     const filterQuery: string = _req.query.filter as string || '';
@@ -113,7 +131,18 @@ class UserController {
 }
 ```
 
+<div class="mt-12">
+
+<v-click>
+
+- Does this live up to your type safety expectations?
+
+</v-click>
+
+</div>
+
 <!--
+  - What do you think about this TypeScript code?
   - Looks ok
   - We're typing the query parameter 'filter' as string
   - if we run `npx tsc` this will pass
@@ -121,7 +150,7 @@ class UserController {
 
 ---
 
-# Just an error...
+# Just an error in the log...
 
 ![error](./images/error.png)
 
@@ -130,10 +159,13 @@ class UserController {
 -->
 
 ---
-layout: two-cols
-layoutClass: gap-16
+layout: top-title-two-cols
+color: red
 ---
-# Look at this silly vulnerability
+
+:: title ::
+
+:: left ::
 
 Can you spot the issue?
 
@@ -153,9 +185,9 @@ Can you spot the issue?
   };
 ```
 
-::right::
+:: right ::
 
-<div class="mt-32">
+<div class="mt-12">
 </div>
 
 <v-click>
