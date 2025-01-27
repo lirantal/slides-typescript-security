@@ -993,27 +993,35 @@ PUT /users/123/settings/notifications
 
 2. And the controller handler as follows:
 
-```ts
-  public setUserNotificationSetting: RequestHandler = async 
-    (req: Request, res: Response) => {
+```ts {all|3-6|11,14}
+public setUserNotificationSetting: RequestHandler = async 
+          (req: Request, res: Response) => {
+    const notificationSchema = z.object({
+      notificationType: z.string(),
+      notificationMode: z.string(),
+      notificationModeValue: z.union([z.string(), z.boolean()]),
+    });
 
+    const validationResult = notificationSchema.safeParse(req.body);
+    const { notificationType, notificationMode, notificationModeValue } = validationResult.data;
     const userId: string = req.params.id;
-    const notificationType: NotificationType = req.body.notificationType;
-    const notificationMode: string = req.body.notificationMode;
-    const notificationModeValue: string | boolean = req.body.notificationModeValue;
 
     await userService.setUserNotificationSetting(userId, 
-                        notificationType, notificationMode, notificationModeValue);
-    return res.status(201).send("User notification setting updated successfully");
+      notificationType as NotificationType, notificationMode, notificationModeValue);
   }
 ```
 
 </v-click>
 
-<v-click>
+<v-click at="2">
 
-- ✅ Typed at dev-time with TypeScript
-- ✅ Typed at runtime with with Zod
+- ✅ Typed at **runtime** with with Zod
+
+</v-click>
+
+<v-click at="3">
+
+- ✅ Typed at **dev-time** with TypeScript
 
 </v-click>
 
