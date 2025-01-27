@@ -1,13 +1,13 @@
 ---
 theme: "neversink"
-layout: cover
+layout: intro
+color: black
 title: "All You Need for Security is... TypeScript?"
-slide_info: false
 info: |
   ## A TypeScript Security Talk
   by Liran Tal
 # apply unocss classes to the current slide
-# class: text-center
+class: text-center
 # https://sli.dev/features/drawing
 drawings:
  persist: false
@@ -15,9 +15,9 @@ transition: slide-left
 mdc: true
 ---
 
-# All You Need for Security is... TypeScript?
+# All You Need for Security is... TypeScript? 😯
 
-<div class="">
+<div class="mt-16">
   <div class="text-3xl text-yellow-500">
     Liran Tal
   </div>
@@ -26,7 +26,7 @@ mdc: true
   </span>
 </div>
 
-<div class="flex flex-row justify-center gap-2 mt-8 align-middle">
+<div class="flex flex-row justify-center gap-2 mt-4 align-middle">
   <div class="rounded-full w-1/8 bg-white">
     <img src="./images/lirantal.png" class="p-1 object-cover rounded-full" />
   </div>
@@ -47,6 +47,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 layout: top-title
+color: purple-light
 align: l
 ---
 
@@ -56,8 +57,6 @@ align: l
 
 :: content ::
 
-also known as "the silliness table"
-
 ![type juggling in PHP](./images/type-juggling-in-php.png)
 
 <!--
@@ -66,6 +65,7 @@ source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20J
 
 ---
 layout: top-title
+color: amber-light
 align: l
 ---
 
@@ -83,7 +83,7 @@ align: l
 
 ---
 layout: side-title
-color: emerald-light
+color: amber-light
 align: rm-lm
 ---
 
@@ -110,6 +110,7 @@ align: rm-lm
 ---
 layout: top-title
 align: l
+color: amber
 ---
 
 :: title ::
@@ -165,6 +166,8 @@ color: red
 
 :: title ::
 
+Danger Will Robinson! 
+
 :: left ::
 
 Can you spot the issue?
@@ -204,7 +207,7 @@ Can you spot the issue?
 
 # A "silly vulnerability" that paid $10k in bug bounty
 
-That's $10,000 for a string of text ;-)
+### (that's $10,000 for a string of text 😉)
 
 ![dustjs-linkedin bug bounty demo](./images/dustjs-linkedin-bug-bounty-demo.png)
 
@@ -213,31 +216,44 @@ https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_p
 -->
 
 ---
-layout: quote
+layout: center
 ---
 
-<div grid="~ cols-2 gap-4">
+<div class="flex flex-row justify-between gap-52">
 
 <div>
-  <div v-click="1">
 
-# No, it wouldn't...
-  </div>
+<SpeechBubble position="l" color='purple' shape="round" maxWidth="300px">
 
-<div v-click="3">
+# No, it wouldn't
+</SpeechBubble>
 
-# No, it... wouldn't...
+
+<div v-click="2" class="mt-14">
+
+<SpeechBubble position="l" color='purple' shape="round" maxWidth="300px">
+
+# No, it wouldn't
+</SpeechBubble>
+
   </div>
 </div>
 
 <div>
-<div v-click="2">
+<div v-click="1" class="mt-14">
+
+<SpeechBubble position="r" color='amber-light' shape="round" maxWidth="300px">
 
 # Yes it would
+</SpeechBubble>
 </div>
-<div v-click="4">
+<div v-click="3" class="mt-14">
+
+<SpeechBubble position="r" color='amber-light' shape="round" maxWidth="350px">
 
 # Yes yes it would! just use TypeScript!!
+</SpeechBubble>
+
 </div>
 </div>
 
@@ -256,21 +272,40 @@ layout: quote
  -->
 
 ---
+layout: cover
+color: yellow
+---
 
-# So how do we do Express + TypeScript ?
+# So, let's see some of the magic in Express + TypeScript ?
 
-The premise: all you need is TypeScript. If you type everything, you're safe. TypeScript param types will be catching these.
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
+
+# A Express + TypeScript Example
+
+:: content ::
+
+## The premise:
+
+- All you need is TypeScript
+- If you type everything, you're safe
+- TypeScript param types will be catching these
 
 <v-switch>
   <template #1>
 
-  ![typescript type checks for express route](./images/typescript-type-checks-for-express-route.png){width=90%}
+  ![typescript type checks for express route](./images/typescript-type-checks-for-express-route.png){width=80%}
 
   </template>
 
   <template #2>
 
-  Security promises:
+## Security promises:
+
   - Types are enforced at development time and through-out the code
   - "TypeScript CI failures prevent production deploys with errors"
 
@@ -280,44 +315,47 @@ The premise: all you need is TypeScript. If you type everything, you're safe. Ty
 
 ---
 layout: quote
+author: 'Liran Tal'
+color: purple-light
 ---
 
-<v-switch>
-  <template #0>
+## TypeScript does not give any security guarantees.
 
-# "TypeScript does not give any security guarantees. It's a tool to help you write better code, but it's not a security tool."
-
--TypeScript Security Fallacies
-
-  </template>
-
-  <template #1>
-
-# "TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage."
-
--TypeScript Security Fallacies
-
-  </template>
-
-</v-switch>
+<!--
+  It's a tool to help you write better code, but it's not a security tool
+-->
 
 ---
+layout: quote
+author: 'Liran Tal'
+color: purple-light
+---
+
+## TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
+
+
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
 
-Express + TypeScript
+:: content ::
 
-Start with a route definition:
+Express Route definition:
 
 ```ts {all}
 app.get("/users", userController.getUsers);
 ```
 
-<v-click>
+<div v-click="1" class="mt-12"> 
 
 Then the repository layer:
 
-```ts {all|2}
+```ts
 export class UserRepository {
   async findAllAsync({ filter }: { filter?: string } = {}): Promise<User[]> {
     if (filter) {
@@ -329,7 +367,7 @@ export class UserRepository {
 }
 ```
 
-</v-click>
+</div>
 
 <!-- 
   We have a /users endpoint that serves as a REST API endpoint. It allows users to search for themselves and, in particular, to pass a filter string to match the user's name.
@@ -337,8 +375,15 @@ export class UserRepository {
 -->
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
+
+:: content ::
 
 To query the users, a GET HTTP request is sent:
 
@@ -352,8 +397,15 @@ $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filte
 -->
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
+
+:: content ::
 
 The controller layer:
 
@@ -373,8 +425,15 @@ class UserController {
 ```
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
+
+:: content ::
 
 Sending a request with a filter query string to the `/users` endpoint with value of `Al` returns results, **as expected**.
 
@@ -401,8 +460,15 @@ $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filte
 ```
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
+
+:: content ::
 
 What if applied a type juggling attempt that changes the filter query string to an array?
 
@@ -433,8 +499,15 @@ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[
 -->
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #1
+
+:: content ::
 
 This works as before because JavaScript converts the array to its `toString` definition.
 
@@ -447,13 +520,18 @@ const serviceResponse = await userService.findAll({ filter: filterQuery });
   But, no surprise here either because some of you TypeScript zealots might have caught up on the horrendous TypeScript definition for `any`
 -->
 
-# TypeScript Security Bypass #1
-
 Let's do better!
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #2
+
+:: content ::
 
 - Let's drop the use of `any`
 - Let's use TypeScript to define the query parameter as a string
@@ -475,8 +553,15 @@ class UserController {
 -->
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #2
+
+:: content ::
 
 To ensure that we're keeping up with TypeScript's type safety and everything compiles correctly, we run:
 
@@ -485,8 +570,15 @@ $ npx tsc
 ```
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript Security Bypass #2
+
+:: content ::
 
 Now surely *type juggling* won't work, right?
 
@@ -513,8 +605,15 @@ $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filte
 ```
 
 ---
+layout: top-title
+color: purple-light
+---
+
+:: title ::
 
 # A Reflection on Typing Practices
+
+:: content ::
 
 ```ts
 // ❌
@@ -524,50 +623,111 @@ const filterQuery: any = _req.query.filter
 const filterQuery: string = _req.query.filter as string || '';
 ```
 
+<div class="flex flex-row justify-between flex-row-reverse mt-14">
+
+<div v-click>
 Them:
-> Oh no, don't do that! 
-> You are lying to TypeScript
 
+<SpeechBubble position="r" color='amber-light' shape="round" maxWidth="300px">
+
+Oh no, don't do that!
+
+You are lying to TypeScript
+</SpeechBubble>
+
+</div>
+
+
+<div v-click class="mt-14">
 Me:
-> Hmmm, ok... I guess... ?
+<SpeechBubble position="l" color='purple' shape="round" maxWidth="300px">
+
+Hmmm, ok... I guess... ?
+</SpeechBubble>
+
+</div>
+
+</div>
 
 ---
+layout: image-right
+image: ./images/linkedin-post-about-express-and-typescript-from-2023.png
+backgroundSize: contain
+---
+
+<ArrowDraw color='yellow' class="absolute top-88 left-125" width="220px" />
+
+<div class="grid h-full place-items-center center">
 
 # A Reflection on Typing Practices
 
-![linkedin post about express and typescript from 2023](./images/linkedin-post-about-express-and-typescript-from-2023.png)
+</div>
 
+---
+layout: image-right
+image: ./images/blog-post-about-express-and-typescript.png
+backgroundSize: contain
+---
+
+<ArrowDraw color='yellow' class="absolute top-65 left-115" width="220px" />
+
+<div class="grid h-full place-items-center center">
 
 # A Reflection on Typing Practices
 
-![blog post about express and typescript](./images/blog-post-about-express-and-typescript.png)
+</div>
 
 
 ---
+layout: cover
+---
 
-# TypeScript for a Secure React Server Component
+# Making React Server Component Secure with TypeScript ? 
 
-> 🤔
-> So maybe we need to declare the types as interfaces?
+---
+
+<SpeechBubble position="l" color='purple' shape="round" maxWidth="300px">
+
+🤔
+So maybe we need to declare the types as interfaces?
+
+</SpeechBubble>
+
+<div class="mt-14">
 
 TypeScript expects to uphold the following generic:
 
+</div>
+
 ```ts
-(alias) interface Request<P = core.ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = qs.ParsedQs, Locals extends Record<string, any> = Record<string, any>>
-import Request
+(alias) interface Request<P = core.ParamsDictionary, 
+    ResBody = any,
+    ReqBody = any,
+    ReqQuery = qs.ParsedQs, 
+    Locals extends Record<string, any> = Record<string, any>>
+  import Request
 ```
 
 <!--
-  We'll follow a more conventional typing strategy instead of forcing TypeScript with an any or as string type declaration. We will define the interface for the expected query string schema and apply it to the Request object type.
+  We'll follow a more conventional typing strategy instead of forcing TypeScript with an any or as string type declaration.
+  
+  We will define the interface for the expected query string schema and apply it to the Request object type.
 -->
 
 ---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
 
 # TypeScript for a Secure React Server Component
 
+:: content ::
+
 Let's build our own poor-man's React Server Components... 🎉
 
-```ts
+```ts {all|8|2|13,14}
 interface UserComponentQueryString {
   name?: string;
 }
@@ -587,14 +747,26 @@ class UserController {
 ```
 
 <!--
+  Let's break this one down...
+
   Of course what's missing here is........... security sanitization!
 -->
 
 ---
+layout: top-title-two-cols
+color: amber-light
+align: l-lt-lt
+---
 
-# TypeScript for a Secure React Server Component
+:: title ::
 
-```ts
+A Secure React Server Component
+
+:: left ::
+
+Updating our user component:
+
+```ts {6-11}
 public getUserHelloComponent: RequestHandler = async (
     _req: Request<{}, {}, {}, UserComponentQueryString>,
      res: Response) => {
@@ -612,49 +784,79 @@ public getUserHelloComponent: RequestHandler = async (
     }
 ```
 
+:: right ::
+
 Implementation of `sanitizeXSS`:
 
 ```ts
 function sanitizeXSS(name: string): boolean {
   const disallowList = ["<", ">", "&", '"', "'", "/", "="];
 
-  return !disallowList.some((badInput) => name.includes(badInput));
+  return !disallowList.
+            some((badInput) => name.includes(badInput));
 }
 ```
 
 Now everything is typed and our interfaces are set!
 
 ---
+layout: cover
+---
 
-# TypeScript for a Secure React Server Component
+# TypeScript saves the day? 🤞
 
-Does TypeScript save the day?
-
-```sh
-$ curl -G -X 'GET' -H 'accept: application/json' "http://localhost:8080/users/component" --data-urlencode "name=<img liran"
+```sh {0-5|6}
+$ curl -G -X 'GET' 
+  -H 'accept: application/json'
+  "http://localhost:8080/users/component" 
+  --data-urlencode "name=<img liran"
 
 Bad input detected!
 ```
 
+<v-click at="1">
+
 Hurray! 🎉
 
+</v-click>
+
+---
+layout: cover
 ---
 
-# TypeScript for a Secure React Server Component
+# TypeScript saves the day? 🤞
 
-But you know learned an offensive security trick, right...? 😁
+But you now learned an offensive security trick, right...? 😁
 
-```ts
-$ curl -G -X 'GET' -H 'accept: application/json' "http://localhost:8080/users/component" --data-urlencode "name[]=<img src=x onError=alert(1) />"           
+reminder: type juggling
+
+<v-click>
+
+```sh {0-5|6}
+$ curl -G -X 'GET' 
+  -H 'accept: application/json'
+  "http://localhost:8080/users/component"
+  --data-urlencode "name[]=<img src=x onError=alert(1) />"           
 
 <h1>Hello, <img src=x onError=alert(1) />!</h1>
 ```
 
-Congrats, you're a hacker!
+Congrats, you're a hacker! 👏
+
+</v-click>
+
 
 ---
+layout: side-title
+color: amber-light
+align: rm-lm
+---
+
+:: title ::
 
 # TypeScript Pitfalls
+
+:: content ::
 
 - ❌ Some libraries are simply not typed
 - ❌ Some libraries are typed but are just wrongly typed
@@ -669,8 +871,18 @@ Congrats, you're a hacker!
 -->
 
 ---
+layout: side-title
+color: amber-light
+align: rm-lm
+---
 
-# How to spice up TypeScript for security? #1
+:: title ::
+
+# How to spice up TypeScript for security?
+
+### (part 1)
+
+:: content ::
 
 - ✅ Follow the "TypeScript Narrowing" pattern
 
@@ -680,11 +892,27 @@ if (typeof filterQuery !== "string") {
 }
 ```
 
+<v-click>
+
 - 👎 Con: you need to remember adding these type guards all the time
 - 👎 Con: your codebase might feel more "dirty" with all these type checks
 - 👎 Con: not all type guards are created equal (e.g: typeof `null` is... `object 😅)
 
-# How to spice up TypeScript for security? #2
+</v-click>
+
+---
+layout: side-title
+color: amber-light
+align: rm-lm
+---
+
+:: title ::
+
+# How to spice up TypeScript for security?
+
+### (part 2)
+
+:: content ::
 
 - ✅ Use a strict schema for runtime security
 
@@ -703,34 +931,52 @@ app.get("/users", (req, res) => {
 ```
 
 ---
+layout: cover
+color: red
+---
 
-# Can we bypass both TypeScript **AND** Zod 😍 ???
+# Can we bypass both &nbsp;&nbsp;&nbsp;&nbsp; TypeScript AND Zod ??? 😍🤪🤠
 
 ---
 
 # Use-Case: User Notifications Setting
 
+```sh
 > [narrated in the voice of your product manager]
->
-> As a user,
-> I want to be able to set a single notification preference,
-> so that I can control the notifications I receive.
 
+As a user,
+I want to be able to set a single notification preference,
+so that I can control the notifications I receive.
+```
+
+<div class="mt-14">
+<v-click>
 Let's define the route:
 
 ```ts
 userRouter.put("/:id/settings/notifications", userController.setUserNotificationSetting);
 ```
 
+</v-click>
+</div>
+
 <!--
   Let's expand on a real world and quite typical use-case
 -->
 
 ---
+layout: top-title-two-cols
+color: amber-light
+align: l-lt-lt
+---
 
-# Use-Case: User Notifications Setting
+:: title ::
 
-Request to be handled sends a JSON object as follows:
+Use-Case: User Notifications Setting
+
+:: left ::
+
+1. Request to be handled sends a JSON object as follows:
 
 ```json
 PUT /users/123/settings/notifications
@@ -741,23 +987,36 @@ PUT /users/123/settings/notifications
 }
 ```
 
-And the controller handler as follows:
+:: right ::
+
+<v-click>
+
+2. And the controller handler as follows:
 
 ```ts
-  public setUserNotificationSetting: RequestHandler = async (req: Request, res: Response) => {
+  public setUserNotificationSetting: RequestHandler = async 
+    (req: Request, res: Response) => {
 
     const userId: string = req.params.id;
     const notificationType: NotificationType = req.body.notificationType;
     const notificationMode: string = req.body.notificationMode;
     const notificationModeValue: string | boolean = req.body.notificationModeValue;
 
-    await userService.setUserNotificationSetting(userId, notificationType, notificationMode, notificationModeValue);
+    await userService.setUserNotificationSetting(userId, 
+                        notificationType, notificationMode, notificationModeValue);
     return res.status(201).send("User notification setting updated successfully");
   }
 ```
 
-✅ Typed at dev-time with TypeScript
-✅ Typed at runtime with with Zod
+</v-click>
+
+<v-click>
+
+- ✅ Typed at dev-time with TypeScript
+- ✅ Typed at runtime with with Zod
+
+</v-click>
+
 
 ---
 
