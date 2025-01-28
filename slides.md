@@ -260,8 +260,73 @@ layout: center
 </div>
 
 ---
+layout: default
+color: purple-light
+---
 
 # HTTP Parameter Pollution
+
+**Definition**: _Manipulating HTTP request data to bypass security controls and introduce unexpected behaviors_
+
+--
+
+<div class="flex flex-row justify-between gap-4">
+
+<div>
+
+### HTTP Request
+
+```sh
+http://example.com/?redirectURL=/admin&redirectURL=http://evil.com
+```
+
+</div>
+
+<div>
+
+### Route Handler
+
+```ts
+app.get("/", (req, res) => 
+  {
+    const redirect = req.query.redirectURL || "/home"
+    res.redirect(redirect)
+  })
+```
+
+</div>
+
+</div>
+
+<div class="flex flex-row justify-between gap-4">
+
+<div>
+
+### HTTP Request
+
+```sh
+http://example.com/users?userId[prop1][prop2]=value
+```
+
+</div>
+
+<div>
+
+### Route Handler
+
+```ts
+app.get("/users", (req, res) => 
+  {
+    const userId = req.query.userId
+    // is userId a string?
+    // is userId an object?
+    service.getAllUsersByFilter({user: userId})
+  })
+```
+
+</div>
+
+</div>
 
 <!--
  ok so before we dive into whether typing the request would work or not
