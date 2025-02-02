@@ -166,7 +166,7 @@ color: red
 
 :: title ::
 
-Danger Will Robinson! 
+Danger Will Robinson!
 
 :: left ::
 
@@ -377,6 +377,21 @@ color: amber-light
   </template>
 
 </v-switch>
+
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
+
+More than 50% of the time, developers rely TypeScript alone for type-safety
+
+:: content ::
+
+<div class="ml-35">
+  <Tweet id="1883849641860710563"/>
+</div>
 
 ---
 layout: quote
