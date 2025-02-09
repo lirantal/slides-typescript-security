@@ -1186,7 +1186,7 @@ Congrats, you're a hacker! 👏
 
 ---
 layout: top-title
-color: amber-light
+color: red-light
 ---
 
 :: title ::
@@ -1288,6 +1288,192 @@ $ curl http://localhost:8080/admin
 
 Hello, Admin!
 ```
+
+---
+layout: cover
+color: red
+---
+
+## TypeScript + Zod another bypass? 😬😅
+
+![here we go again](./images/here-we-go-again.png){width=80%}
+
+
+---
+layout: top-title
+color: blue-light
+---
+
+:: title ::
+
+# TS + Zod Bypass, so far so good?
+
+:: content ::
+
+#### 1. Incoming HTTP Request
+
+```sh {all|2-4}
+$ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1/profile  -d '{
+     "name": "Liran",
+     "email": "liran@example.com",
+     "age": 30
+}'
+```
+
+<div class="flex flex-row justify-between gap-4">
+
+<div>
+
+#### 2. Controller Layer
+
+```ts {4,8-9}
+async saveUser (req: Request, res: Response) => {
+    const userObject = req.body;
+    userObject.id = Number.parseInt(req.params.id, 10);
+    const validationResult = UserSchema.safeParse(userObject);
+
+    if (!validationResult.success) {}
+
+    const user: User = userObject;
+    const serviceResponse = await userService.saveUser(user);
+    return handleServiceResponse(serviceResponse, res);
+  }
+```
+
+</div>
+
+<div>
+
+#### 3. Service Layer
+
+```ts {3}
+async saveUser(user: User): Promise {
+  try {
+    const result = await db.update(usersTable)
+      .set(user)
+      .where(eq(usersTable.id, 1));
+
+    // return success
+  } catch (error) {}}
+}
+```
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: red-light
+---
+
+:: title ::
+
+# TS + Zod Bypass, oh no!
+
+:: content ::
+
+#### 1. Incoming HTTP Request
+
+````md magic-move
+```sh {all|2-4}
+$ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1/profile  -d '{
+     "name": "Liran",
+     "email": "liran@example.com",
+     "age": 30
+}'
+```
+```sh {all}
+$ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1/profile  -d '{
+     "name": "Liran",
+     "email": "liran@example.com",
+     "age": 30,
+     "role": "admin"
+}'
+```
+````
+
+<div class="flex flex-row justify-between gap-4">
+
+<div v-click="3">
+
+#### 2. Controller Layer
+
+```ts {all|4,8-9}
+async saveUser (req: Request, res: Response) => {
+    const userObject = req.body;
+    userObject.id = Number.parseInt(req.params.id, 10);
+    const validationResult = UserSchema.safeParse(userObject);
+
+    if (!validationResult.success) {}
+
+    const user: User = userObject;
+    const serviceResponse = await userService.saveUser(user);
+    return handleServiceResponse(serviceResponse, res);
+  }
+```
+
+</div>
+
+<div v-click="3">
+
+#### 3. Service Layer
+
+```ts {all|3}
+async saveUser(user: User): Promise {
+  try {
+    const result = await db.update(usersTable)
+      .set(user)
+      .where(eq(usersTable.id, 1));
+
+    // return success
+  } catch (error) {}}
+}
+```
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: red-light
+---
+
+:: title ::
+
+# TS + Zod Bypass, oh no!
+
+:: content ::
+
+#### 1. Incoming HTTP Request
+
+```sh {all}
+$ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1/profile  -d '{
+     "name": "Liran",
+     "email": "liran@example.com",
+     "age": 30,
+     "role": "admin"
+}'
+```
+
+### ❌ Mass Assignment Vulnerability
+
+- Over-writing or introducing new properties, unintentionally
+- Common with ORMs, a la:
+
+  ```js
+  User.save(user);
+  ```
+
+---
+layout: over
+color: purple-light
+---
+
+### TypeScript Security Learnings 🧑‍🎓
+
+<Bluesky />
 
 ---
 layout: cover
