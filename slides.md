@@ -1313,7 +1313,7 @@ color: purple-light
 ---
 layout: credits
 color: light
-speed: 4.8
+speed: 0.3
 ---
 
 <div class="grid text-size-4 grid-cols-3 w-3/4 gap-y-10 auto-rows-min ml-auto mr-auto">
@@ -1323,7 +1323,7 @@ speed: 4.8
 </div>
 <div class="grid-item text-center mr-0- col-span-3">
   <strong>Thank You</strong><br> 
-  <span class="font-size-3 mt-0">(in order of appearance)</span>
+  <span class="font-size-3 mt-0">(not in order of appearance)</span>
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
