@@ -219,7 +219,13 @@ https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_p
 layout: center
 ---
 
-<div class="flex flex-row justify-between gap-52">
+<div class="text-center">
+
+## _"TypeScript would have caught this"_
+
+</div>
+
+<div class="flex flex-row justify-between gap-52 mt-12">
 
 <div>
 
@@ -350,7 +356,7 @@ color: amber-light
 
 :: title ::
 
-# A Express + TypeScript Example
+# Express + TypeScript Example
 
 :: content ::
 
@@ -385,7 +391,7 @@ color: amber-light
 
 :: title ::
 
-More than 50% of the time, developers rely TypeScript alone for type-safety
+More than 50% of the time, developers rely on TypeScript alone for type-safety
 
 :: content ::
 
