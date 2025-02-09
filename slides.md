@@ -1482,19 +1482,32 @@ color: purple-light
 
 ### TypeScript Security Learnings 🧑‍🎓
 
+<div class="flex flex-row justify-center gap-16">
+
+<div>
+
 - 👍 Use TypeScript, it's great
 - ❌ TypeScript is not a security tool
 - ✅ Adopt Zod and TS Narrowing
 - ✅ Validate schema allow-list
 - ✅ Practice defense in depth
 
+</div>
+
+<div>
+
 <v-click>
 
 - 🎓 You also learned some new security tricks:
-  - Type Juggling vulnerabilities 🤡
+  - Type Juggling Vulnerabilities 🤡
   - Prototype Pollution Attacks 💨
+  - Mass Assignment Vulnerabilities ✍️
 
 </v-click>
+
+</div>
+
+</div>
 
 ---
 layout: credits
