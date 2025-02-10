@@ -1523,6 +1523,10 @@ if (options.includeInheritedProps && (currentPath === '__proto__' ||
 }
 ```
 
+<!--
+  Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
+-->
+
 ---
 layout: top-title
 color: blue-light
@@ -1567,6 +1571,10 @@ if (options.includeInheritedProps && (currentPath === '__proto__' ||
 ```
 
 </div>
+
+<!--
+  Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
+-->
 
 ---
 layout: cover
