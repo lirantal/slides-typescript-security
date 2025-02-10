@@ -1577,6 +1577,77 @@ if (options.includeInheritedProps && (currentPath === '__proto__' ||
 -->
 
 ---
+layout: top-title
+color: blue-light
+align: l
+---
+
+:: title ::
+
+# Case study: `edge.js` (2021)
+
+:: content ::
+
+### ℹ Standard use-case
+
+```js
+// curl -i -X GET "https://localhost:3000/test?name[]=%3Cimg%20src=x%20onerror=%27alert(1)%27%20/%3E"
+app.get('/home', (req, res) => {
+    const html = edge.render('welcome', { greeting: req.query.name })
+    return res.send(html)
+})
+```
+
+```js
+<p> {{ greeting }} </p>
+```
+
+```js
+public escape<T>(input: T): T extends SafeValue ? T['value'] : T {
+  return typeof input === 'string'
+    ? string.escapeHTML(input)
+    : input instanceof SafeValue
+    ? input.value
+    : input
+}
+```
+
+<!--
+  Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
+-->
+
+
+---
+layout: top-title
+color: blue-light
+align: l
+---
+
+:: title ::
+
+# Case study: `edge.js` (2021)
+
+:: content ::
+
+### ✅ Safely escaped
+
+```
+GET http://localhost:3000/test?name=%3Cimg%20src=x%20onerror=%27alert(1)%27%20/%3E
+```
+
+<div class="block mt-8"></div>
+
+### ❌ Not safely escaped
+
+```
+GET http://localhost:3000/test?name[]=%3Cimg%20src=x%20onerror=%27alert(1)%27%20/%3E
+```
+
+<!--
+  Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
+-->
+
+---
 layout: cover
 color: purple-light
 ---
