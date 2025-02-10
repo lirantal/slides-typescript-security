@@ -1478,6 +1478,97 @@ color: purple-light
 <Bluesky class="mt-16" id="at://did:plc:b3xwbnwkl5qzjjhkwoimvb6x/app.bsky.feed.post/3lfwiv5x46k2a" />
 
 ---
+layout: default
+color: blue-light
+---
+
+# But Liran, how real are these attacks?
+
+
+---
+layout: top-title
+color: blue-light
+align: l
+---
+
+:: title ::
+
+# Case study: `object-path` (2020-2021)
+
+:: content ::
+
+### ℹ Standard use-case
+
+```js
+const objectPath = require('object-path');
+objectPath.withInheritedProps.set({}, 'address', 'business', 'Menachem Begin 37, Tel Aviv');
+```
+
+<div class="block mt-8"></div>
+
+### ❌ Vulnerable code
+
+```js
+objectPath.withInheritedProps.set({}, '__proto__', 'isAdmin', true);
+```
+
+<div class="block mt-8"></div>
+
+### ✅ Fix
+
+```js
+if (options.includeInheritedProps && (currentPath === '__proto__' ||
+  (currentPath === 'constructor' && typeof currentValue === 'function'))) {
+  throw new Error('For security reasons, object\'s magic properties cannot be set')
+}
+```
+
+---
+layout: top-title
+color: blue-light
+align: l
+---
+
+:: title ::
+
+# Case study: `object-path` (2020-2021)
+
+:: content ::
+
+### ❌ Vulnerable code
+
+````md magic-move
+```js
+objectPath.withInheritedProps.set({}, '__proto__', 'isAdmin', true);
+```
+```js
+objectPath.withInheritedProps.set({}, [['__proto__'], 'polluted'], 'yes');
+```
+````
+
+- Expected strings to be strings but what about arrays?
+
+<div v-click="2" class="block mt-8">
+
+### ✅✅ Fix
+
+- Snyk security research team discovered and worked with maintainers to fix
+
+```js
+var currentPath = path[0];
+if (typeof currentPath !== 'string' && typeof currentPath !== 'number') {
+  currentPath = String(currentPath)
+}
+var currentValue = getShallowProperty(obj, currentPath);
+if (options.includeInheritedProps && (currentPath === '__proto__' ||
+  (currentPath === 'constructor' && typeof currentValue === 'function'))) {
+  throw new Error('For security reasons, object\'s magic properties cannot be set')
+}
+```
+
+</div>
+
+---
 layout: cover
 color: purple-light
 ---
