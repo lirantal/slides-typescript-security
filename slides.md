@@ -13,6 +13,8 @@ drawings:
  persist: false
 transition: slide-left
 mdc: true
+addons:
+  - slidev-addon-bluesky
 ---
 
 # All You Need for Security is... TypeScript? 😯
@@ -1467,13 +1469,13 @@ $ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1
   ```
 
 ---
-layout: over
+layout: default
 color: purple-light
 ---
 
 ### TypeScript Security Learnings 🧑‍🎓
 
-<Bluesky />
+<Bluesky class="mt-16" id="at://did:plc:b3xwbnwkl5qzjjhkwoimvb6x/app.bsky.feed.post/3lfwiv5x46k2a" />
 
 ---
 layout: cover
