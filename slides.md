@@ -956,7 +956,7 @@ align: rm-lm
 
 - ❌ Some libraries are simply not typed
 - ❌ Some libraries are typed but are just wrongly typed
-- ❌ Some libraries are typed. With "any". Goodluck 🙏
+- ❌ Some libraries are typed with "any". Goodluck 🙏
 - ❌ Do not use the `any` TypeScript wildcard
 - ❌ TypeScript is "development-time" confidence, not "runtime" security
 - ❌ Do not rely on TypeScript alone for Type security
