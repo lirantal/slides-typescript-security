@@ -2,7 +2,7 @@
 theme: "neversink"
 layout: intro
 color: black
-title: "All You Need for Security is... TypeScript?"
+title: "Friend or Foe? TypeScript Security Fallacies"
 info: |
   ## A TypeScript Security Talk
   by Liran Tal
@@ -17,7 +17,8 @@ addons:
   - slidev-addon-bluesky
 ---
 
-# All You Need for Security is... TypeScript? 😯
+# Friend or Foe?
+# TypeScript Security Fallacies 
 
 <div class="mt-16">
   <div class="text-3xl text-yellow-500">
@@ -43,9 +44,25 @@ addons:
   </div>
 </div>
 
+---
+layout: center
+---
+
+<div class="text-center">
+
+## Just _Types_, what's all the fuss about?
+
+</div>
+
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+ So I mean, Types are easy, right?
+ 
+We've had strongly typed languages for decades.
+Just add them to your codebase and you're good to go!
+
+ Let's explore this a bit...
 -->
+
 
 ---
 layout: top-title
@@ -62,6 +79,11 @@ align: l
 ![type juggling in PHP](./images/type-juggling-in-php.png)
 
 <!--
+
+Not to dunk on PHP but if you're a PHP developer you know what I'm talking about 😅
+
+PHP is a loosely typed language, and it's known for its type juggling quirks.
+
 source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20Juggling/README.md
 -->
 
@@ -83,6 +105,18 @@ align: l
 
 </div>
 
+<!--
+
+But don't go too far out and feel comfortable with JavaScript either
+
+JavaScript has its own quirks too
+
+A fun example of that is why `[] == ![];` will yield `true` in JavaScript
+
+Explanation (sourced from the wtfjs GitHub repo):
+The abstract equality operator converts both sides to numbers to compare them, and both sides become the number 0 for different reasons. Arrays are truthy, so on the right, the opposite of a truthy value is false, which is then coerced to 0. On the left, however, an empty array is coerced to a number without becoming a boolean first, and empty arrays are coerced to 0, despite being truthy.
+-->
+
 ---
 layout: side-title
 color: amber-light
@@ -95,18 +129,32 @@ align: rm-lm
 
 :: content ::
 
+<v-clicks>
+
 - Code quality
 - Find bugs faster
 - Lower unit test count
-- Minimize security vulnerabilities
-- Avoid type confusion in runtime <v-click>(wait, what 😮 ???)</v-click>
+- Minimize security vulnerabilities // WAIT WHAT ??? 😮
+- Avoid type confusion in runtime // WAIT WHAT ??? 😮
+
+</v-clicks>
 
 <!--
+
+But, lucky for us JavaScript developers we have TypeScript
+
+What's the promise of TypeScript?
+
 1. Code quality - TypeScript helps you think about the function signature, the returned value and so on
+   
 2. Find bugs faster - TypeScript can run as fast as you code, no need to wait for tests to run in CI
+   
 3. Lower unit test count - TypeScript can catch a lot of bugs that you would have to write tests for
+   
 4. Minimize security vulnerabilities - TypeScript can catch a lot of security vulnerabilities because it can minimize the "unexpected behavior" part of your code (DOES IT??? 😮)
+   
 5. Avoid type confusion in runtime - TypeScript can catch a lot of type confusion bugs that would happen in runtime (REALLY??? 😮)
+
 -->
 
 ---
@@ -278,6 +326,8 @@ color: purple-light
 
 --
 
+<v-click>
+
 <div class="flex flex-row justify-between gap-4">
 
 <div>
@@ -305,6 +355,10 @@ app.get("/", (req, res) =>
 </div>
 
 </div>
+
+</v-click>
+
+<v-click>
 
 <div class="flex flex-row justify-between gap-4">
 
@@ -336,12 +390,20 @@ app.get("/users", (req, res) =>
 
 </div>
 
+</v-click>
+
 <!--
  ok so before we dive into whether typing the request would work or not
  let's explain dustjs the vulnerability in topic 
 
- what is parameter pollution 
- 
+ what is parameter pollution
+
+ in the first example, we have a redirect URL that is being set by the query string, and the route handler is redirecting the user to that URL. However, you'll notice the attacker can set multiple redirectURL query strings. How will the route handler code behave? Which of the redirectURL query strings will be used?
+
+ in the second example, we have a query string that sets a userId query string. While the route handler is expecting a userId string, the attacker can set the userId as an object with nested properties, or what seems to be a 2 dimentional array. How will the route handler code behave? Will it interpret the userId as a string or as an object?
+
+ The answer is that it depends on how you've set up your route middleware, what framework you're using and other details about how your code is structured.
+
  -->
 
 ---
@@ -349,7 +411,7 @@ layout: cover
 color: yellow
 ---
 
-# So, let's see some of the magic in Express + TypeScript ?
+# 🏴‍☠️ So, let's see some of the black magic in Express + TypeScript
 
 ---
 layout: top-title
@@ -421,7 +483,7 @@ color: purple-light
 
 <div class="h-full flex flex-col justify-center items-center">
 
-![wes bos about typescript security](./images/wes-bos-about-typescript-security.png){width=95%}
+![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
 
 </div>
 
@@ -467,6 +529,7 @@ export class UserRepository {
 
 <!-- 
   We have a /users endpoint that serves as a REST API endpoint. It allows users to search for themselves and, in particular, to pass a filter string to match the user's name.
+
   The repository pattern that demonstrates how this filtering is done is as follows: It exposes a findAllAsync method that receives an object with a filter property.
 -->
 
@@ -489,7 +552,7 @@ $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filte
 
 <!--
   How does the filter query string flow from the route definition onto the repository layer? Let’s explore this pattern and how TypeScript is used there.
-  The HTTP route definition is as follows, defining the controller code for the / route at the /users prefix and matches all the HTTP requests for the GET verb:
+
 -->
 
 ---
@@ -519,6 +582,11 @@ class UserController {
   };
 }
 ```
+
+<!--
+  The HTTP route definition is as follows, defining the controller code for the / route at the /users prefix and matches all the HTTP requests for the GET verb:
+-->
+
 
 ---
 layout: top-title
@@ -566,11 +634,9 @@ color: amber-light
 
 :: content ::
 
-What if applied a type juggling attempt that changes the filter query string to an array?
+Now, the `filter` query string uses the array convention `filter[]=Al` ... 🤔
 
-Now, the `filter` query string uses the array convention `filter[]=Al`, yet we get the same results...? 🤔
-
-```sh
+```sh{1|all}
 curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
 
 {
@@ -591,6 +657,8 @@ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[
 ```
 
 <!--
+  What if applied a type juggling attempt that changes the filter query string to an array?
+
   So what's happening here?
 -->
 
@@ -605,12 +673,13 @@ color: amber-light
 
 :: content ::
 
-This works as before because JavaScript converts the array to its `toString` definition.
-
 ```ts
 const filterQuery: any = _req.query.filter || '';
 const serviceResponse = await userService.findAll({ filter: filterQuery });
 ```
+
+- JavaScript `toString` coercion:
+- "Liran please don't use `any`"
 
 <!--
   But, no surprise here either because some of you TypeScript zealots might have caught up on the horrendous TypeScript definition for `any`
@@ -632,7 +701,7 @@ color: amber-light
 - Let's drop the use of `any`
 - Let's use TypeScript to define the query parameter as a string
 
-```ts
+```ts{5}
 class UserController {
   public getUsers: RequestHandler = async (_req: Request, res: Response) => {
 
@@ -659,11 +728,16 @@ color: amber-light
 
 :: content ::
 
-To ensure that we're keeping up with TypeScript's type safety and everything compiles correctly, we run:
+Let's make sure everything compiles correctly:
 
 ```sh
 $ npx tsc
 ```
+
+<!--
+
+To ensure that we're keeping up with TypeScript's type safety and everything compiles correctly, we run: `npx tsc` and the TypeScript compiler is happy
+-->
 
 ---
 layout: top-title
@@ -676,9 +750,7 @@ color: amber-light
 
 :: content ::
 
-Now surely *type juggling* won't work, right?
-
-Let's test this theory!
+Let's test our new String-typed `filter`:
 
 ```sh
 $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
@@ -699,6 +771,10 @@ $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filte
   "statusCode": 200
 }
 ```
+
+<!--
+  Now surely *type juggling* won't work, right?
+-->
 
 ---
 layout: top-title
@@ -721,7 +797,7 @@ const filterQuery: string = _req.query.filter as string || '';
 
 <div class="flex flex-row justify-between flex-row-reverse mt-14">
 
-<div v-click>
+<div>
 Them:
 
 <SpeechBubble position="r" color='amber-light' shape="round" maxWidth="300px">
@@ -748,16 +824,20 @@ Hmmm, ok... I guess... ?
 ---
 layout: image-right
 image: ./images/linkedin-post-about-express-and-typescript-from-2023.png
-backgroundSize: contain
+backgroundSize: 115%
 ---
 
-<ArrowDraw color='yellow' class="absolute top-88 left-125" width="220px" />
+<ArrowDraw color='yellow' class="absolute top-101 left-133" width="220px" />
 
 <div class="grid h-full place-items-center center">
 
 # A Reflection on Typing Practices
 
 </div>
+
+<!-- 
+But... are you sure everyone gets it?
+-->
 
 ---
 layout: image-right
@@ -862,18 +942,16 @@ A Secure React Server Component
 
 Updating our user component:
 
-```ts {6-11}
+```ts {6-10}
 public getUserHelloComponent: RequestHandler = async (
     _req: Request<{}, {}, {}, UserComponentQueryString>,
      res: Response) => {
 
       const userName = _req.query.name || "World";
 
-      // highlight ----->
       if (!sanitizeXSS(userName)) {
         return res.status(400).send("Bad input detected!");
       }
-      // <----------
 
       const helloComponent = `<h1>Hello, ${userName}!</h1>`;
       return res.send(helloComponent);
@@ -905,7 +983,7 @@ layout: cover
 $ curl -G -X 'GET' 
   -H 'accept: application/json'
   "http://localhost:8080/users/component" 
-  --data-urlencode "name=<img liran"
+  --data-urlencode "name=<img src=liran"
 
 Bad input detected!
 ```
@@ -926,8 +1004,6 @@ layout: cover
 
 reminder: type juggling
 
-<v-click>
-
 ```sh {0-5|6}
 $ curl -G -X 'GET' 
   -H 'accept: application/json'
@@ -938,9 +1014,6 @@ $ curl -G -X 'GET'
 ```
 
 Congrats, you're a hacker! 👏
-
-</v-click>
-
 
 ---
 layout: side-title
@@ -962,8 +1035,13 @@ align: rm-lm
 - ❌ Do not rely on TypeScript alone for Type security
 
 <!--
- Last bullet, emphasize: TypeScript is to be thought of as "defense in depth", adding a layer for better
- code quality and type safety, but it isn't a security tool in itself and doesn't make any runtime guarantees.
+So let's take a second to reflect on some of the TypeScript security fallacies we've learned so far.
+
+ Last bullet, emphasize:
+ 
+  TypeScript is to be thought of as "defense in depth", 
+  
+  adding a layer for better code quality and type safety, but it isn't a security tool in itself and doesn't make any runtime guarantees.
 -->
 
 ---
@@ -1002,7 +1080,7 @@ if (typeof filterQuery !== "string") {
 
 - 👎 Con: you need to remember adding these type guards all the time
 - 👎 Con: your codebase might feel more "dirty" with all these type checks
-- 👎 Con: not all type guards are created equal (e.g: typeof `null` is... `object 😅)
+- 👎 Con: not all type guards are created equal (e.g: typeof `null` is `object` 😅)
 
 </v-click>
 
@@ -1036,12 +1114,20 @@ app.get("/users", (req, res) => {
 });
 ```
 
+<!-- Introducing Zod -->
+
 ---
 layout: cover
 color: red
 ---
 
 # Can we bypass both &nbsp;&nbsp;&nbsp;&nbsp; TypeScript AND Zod ??? 😍🤪🤠
+
+<!--
+
+Well, are you ready for more hacking? ;-)
+
+-->
 
 ---
 
@@ -1095,8 +1181,6 @@ PUT /users/123/settings/notifications
 
 :: right ::
 
-<v-click>
-
 2. And the controller handler as follows:
 
 ```ts {all|3-6|11,14}
@@ -1116,8 +1200,6 @@ public setUserNotificationSetting: RequestHandler = async
       notificationType as NotificationType, notificationMode, notificationModeValue);
   }
 ```
-
-</v-click>
 
 <v-click at="2">
 
