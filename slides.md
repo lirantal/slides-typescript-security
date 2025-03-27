@@ -25,11 +25,75 @@ addons:
     Liran Tal
   </div>
   <span class="text-md text-yellow-500">
-    Developer Advocate at Snyk
+    Voxxed Days Bucharest 2025
   </span>
 </div>
 
 <div class="flex flex-row justify-center gap-2 mt-4 align-middle">
+  <div class="rounded-full w-1/8 bg-white">
+    <img src="./images/lirantal.png" class="p-1 object-cover rounded-full" />
+  </div>
+</div>
+
+---
+layout: intro
+class: text-center
+---
+
+<div class="mt-2">
+  <div class="text-3xl font-bold text-yellow-500">
+    Liran Tal
+  </div>
+  <div class="flex justify-center items-center">
+  <div class="text-center text-yellow-500">
+  Developer Advocate at
+  </div>
+<div class="ml-2">
+  <img alt="snyk logo" src="./images/snyk-logo.svg" width="55">
+</div>
+</div>  
+</div>
+
+<div class="mt-10">
+
+<div>
+🌟 GitHub Star
+</div>
+
+<div>
+🏆 OpenJS Foundation Pathfinder for Security Award
+</div>
+
+<div>
+🐢 Node.js Security Advocate
+</div>
+
+<div class="mt-4 flex justify-center items-center">
+
+<div class="w-1/2 mx-auto">
+
+```js
+$ snyk test [package]
+
+audited 4 packages in 1s
+found 3141527818921 vulnerabilities
+```
+
+</div>
+</div>
+
+<ArrowDraw color='yellow' class="absolute top-79 left-103 rotate-20" width="80px" />
+
+
+<div class="ml-8">
+😅
+</div>
+
+
+</div>
+
+
+<div class="flex flex-row justify-center gap-2 mt-12 align-middle">
   <div class="rounded-full w-1/8 bg-white">
     <img src="./images/lirantal.png" class="p-1 object-cover rounded-full" />
   </div>
@@ -116,6 +180,13 @@ A fun example of that is why `[] == ![];` will yield `true` in JavaScript
 Explanation (sourced from the wtfjs GitHub repo):
 The abstract equality operator converts both sides to numbers to compare them, and both sides become the number 0 for different reasons. Arrays are truthy, so on the right, the opposite of a truthy value is false, which is then coerced to 0. On the left, however, an empty array is coerced to a number without becoming a boolean first, and empty arrays are coerced to 0, despite being truthy.
 -->
+
+
+---
+layout: center
+---
+
+![opra types](./images/opra-types.png)
 
 ---
 layout: side-title
@@ -1784,6 +1855,28 @@ color: purple-light
 </v-click>
 
 </div>
+
+</div>
+
+---
+layout: center
+color: black
+---
+
+<div>
+
+![snyk typescript finding](./images/snyk-typescript-findings.png)
+
+</div>
+
+---
+layout: center
+color: black
+---
+
+<div>
+
+![snyk vscode install](./images/snyk-vscode-install.png)
 
 </div>
 
