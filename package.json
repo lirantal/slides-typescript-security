@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open",
+    "dev:1": "slidev --open slides-40m.md",
+    "dev:2": "slidev --open slides-25m.md",
     "export": "slidev export",
     "postinstall": "npx patch-package"
   },
