@@ -25,7 +25,7 @@ addons:
     Liran Tal
   </div>
   <span class="text-md text-yellow-500">
-    Voxxed Days Bucharest 2025
+    OWASP AppSec EU 🇪🇸
   </span>
 </div>
 
@@ -57,15 +57,15 @@ class: text-center
 <div class="mt-10">
 
 <div>
-🌟 GitHub Star
-</div>
-
-<div>
-🏆 OpenJS Foundation Pathfinder for Security Award
+🌟 GitHub Star / 🏆 OpenJS Foundation Pathfinder for Security Award
 </div>
 
 <div>
 🐢 Node.js Security Advocate
+</div>
+
+<div>
+🤓 Security Researcher
 </div>
 
 <div class="mt-4 flex justify-center items-center">
@@ -82,7 +82,7 @@ found 3141527818921 vulnerabilities
 </div>
 </div>
 
-<ArrowDraw color='yellow' class="absolute top-79 left-103 rotate-20" width="80px" />
+<ArrowDraw color='yellow' class="absolute top-83 left-103 rotate-20" width="80px" />
 
 
 <div class="ml-8">
@@ -107,6 +107,12 @@ found 3141527818921 vulnerabilities
     </a>
   </div>
 </div>
+
+---
+layout: center
+---
+
+![marked-safe-from-ai](./images/marked-safe-from-ai.png)
 
 ---
 layout: center
@@ -318,7 +324,6 @@ Can you spot the issue?
 
   - Found in `dustjs-linkedin`
   - Downloaded 100,000 / month
-  - Let's appreciate that this was found as a blackbox test
 
   ![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
 
@@ -410,7 +415,8 @@ color: purple-light
 ### HTTP Request
 
 ```sh
-http://example.com/?redirectURL=/admin&redirectURL=http://evil.com
+http://example.com/
+  ?redirectURL=/admin&redirectURL=http://evil.com
 ```
 
 </div>
@@ -420,11 +426,10 @@ http://example.com/?redirectURL=/admin&redirectURL=http://evil.com
 ### Route Handler
 
 ```ts
-app.get("/", (req, res) => 
-  {
-    const redirect = req.query.redirectURL || "/home"
-    res.redirect(redirect)
-  })
+app.get("/", (req, res) => {
+  const redirect = req.query.redirectURL || "/home"
+  res.redirect(redirect)
+})
 ```
 
 </div>
@@ -495,7 +500,7 @@ color: amber-light
 
 :: title ::
 
-# Express + TypeScript Example
+# TypeScript To the Rescue?
 
 :: content ::
 
@@ -522,50 +527,6 @@ color: amber-light
   </template>
 
 </v-switch>
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-More than 50% of the time, developers rely on TypeScript alone for type-safety
-
-:: content ::
-
-<div class="ml-35">
-  <Tweet id="1883849641860710563"/>
-</div>
-
----
-layout: quote
-author: 'Liran Tal'
-color: purple-light
----
-
-## TypeScript does not give any security guarantees.
-
-<!--
-  It's a tool to help you write better code, but it's not a security tool
--->
-
----
-layout: intro
-author: 'Liran Tal'
-color: purple-light
----
-
-<div class="h-full flex flex-col justify-center items-center">
-
-![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
-
-</div>
-
-<!-- 
-  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
--->
-
 
 ---
 layout: top-title
@@ -674,13 +635,10 @@ color: amber-light
 
 :: content ::
 
-Sending a request with a filter query string to the `/users` endpoint with value of `Al` returns results, **as expected**.
-
-No surprises here.
+Sending a request to `/users` endpoint with value of `Al` returns results, **as expected**.
 
 ```sh
 $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter=Al"
-
 {
   "success": true,
   "message": "Users found",
@@ -713,7 +671,6 @@ Now, the `filter` query string uses the array convention `filter[]=Al` ... 🤔
 
 ```sh{1|all}
 curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
-
 {
   "success": true,
   "message": "Users found",
@@ -753,7 +710,7 @@ const filterQuery: any = _req.query.filter || '';
 const serviceResponse = await userService.findAll({ filter: filterQuery });
 ```
 
-- JavaScript `toString` coercion:
+- JavaScript `toString` coercion
 - "Liran please don't use `any`"
 
 <!--
@@ -773,8 +730,8 @@ color: amber-light
 
 :: content ::
 
-- Let's drop the use of `any`
-- Let's use TypeScript to define the query parameter as a string
+- Drop the use of `any`
+- Use TypeScript to define the query parameter as a string
 
 ```ts{5}
 class UserController {
@@ -825,11 +782,10 @@ color: amber-light
 
 :: content ::
 
-Let's test our new String-typed `filter`:
+Test the new String-typed query param: `filter[]=Al`
 
 ```sh
 $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
-
 {
   "success": true,
   "message": "Users found",
@@ -1018,19 +974,20 @@ A Secure React Server Component
 Updating our user component:
 
 ```ts {6-10}
-public getUserHelloComponent: RequestHandler = async (
-    _req: Request<{}, {}, {}, UserComponentQueryString>,
-     res: Response) => {
+getUserHelloComponent: RequestHandler = async (
+  ...) => {
+    const userName = 
+      _req.query.name || "World";
 
-      const userName = _req.query.name || "World";
-
-      if (!sanitizeXSS(userName)) {
-        return res.status(400).send("Bad input detected!");
-      }
-
-      const helloComponent = `<h1>Hello, ${userName}!</h1>`;
-      return res.send(helloComponent);
+    if (!sanitizeXSS(userName)) {
+      return res.status(400)
+        .send("Bad input detected!");
     }
+
+    const helloComponent = 
+      `<h1>Hello, ${userName}!</h1>`;
+    return res.send(helloComponent);
+  }
 ```
 
 :: right ::
@@ -1039,10 +996,11 @@ Implementation of `sanitizeXSS`:
 
 ```ts
 function sanitizeXSS(name: string): boolean {
-  const disallowList = ["<", ">", "&", '"', "'", "/", "="];
+  const disallowList = 
+    ["<", ">", "&", '"', "'", "/", "="];
 
   return !disallowList.
-            some((badInput) => name.includes(badInput));
+    some((badInput) => name.includes(badInput));
 }
 ```
 
@@ -1127,19 +1085,6 @@ So let's take a second to reflect on some of the TypeScript security fallacies w
   TypeScript is to be thought of as "defense in depth", 
   
   adding a layer for better code quality and type safety, but it isn't a security tool in itself and doesn't make any runtime guarantees.
--->
-
----
-layout: cover
----
-
-<Tweet id="1883897466019590307"/>
-
-<!--
-
-  This tweet demonstrates why having an adversarial mindset that TypeScript type system is not a security tool is so important
-
-  Developers put misplaced trust in TypeScript and exchange runtime security for test cases
 -->
 
 ---
@@ -1279,7 +1224,7 @@ PUT /users/123/settings/notifications
 
 2. And the controller handler as follows:
 
-```ts {all|3-6|11,14}
+```ts {all|3-6|9,11,14}
 public setUserNotificationSetting: RequestHandler = async 
           (req: Request, res: Response) => {
     const notificationSchema = z.object({
@@ -1299,7 +1244,7 @@ public setUserNotificationSetting: RequestHandler = async
 
 <v-click at="2">
 
-- ✅ Typed at **runtime** with with Zod
+- ✅ Typed at **runtime** with Zod
 
 </v-click>
 
@@ -1412,10 +1357,8 @@ async setUserNotificationSetting() {
     userSettings
       .notifications
         [notificationType]
-        [notificationMode] = notificationModeValue;
-
-    UserSettingsDB.set(userId, userSettings);
-  }
+        [notificationMode]
+          = notificationModeValue;
 ```
 
 </div>
@@ -1829,6 +1772,54 @@ layout: cover
 color: purple-light
 ---
 
+### TypeScript Security Insights 💎
+
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
+
+More than 50% of the time, developers rely on TypeScript alone for type-safety
+
+:: content ::
+
+<div class="ml-35">
+  <Tweet id="1883849641860710563"/>
+</div>
+
+---
+layout: quote
+color: purple-light
+---
+
+## TypeScript does not give any security guarantees.
+
+<!--
+  It's a tool to help you write better code, but it's not a security tool
+-->
+
+---
+layout: intro
+color: purple-light
+---
+
+<div class="h-full flex flex-col justify-center items-center">
+
+![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
+
+</div>
+
+<!-- 
+  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
+-->
+
+---
+layout: cover
+color: purple-light
+---
+
 ### TypeScript Security Learnings 🧑‍🎓
 
 <div class="flex flex-row justify-center gap-16">
@@ -1859,28 +1850,6 @@ color: purple-light
 </div>
 
 ---
-layout: center
-color: black
----
-
-<div>
-
-![snyk typescript finding](./images/snyk-typescript-findings.png)
-
-</div>
-
----
-layout: center
-color: black
----
-
-<div>
-
-![snyk vscode install](./images/snyk-vscode-install.png)
-
-</div>
-
----
 layout: credits
 color: light
 speed: 0.5
@@ -1893,22 +1862,12 @@ speed: 0.5
 </div>
 <div class="grid-item text-center mr-0- col-span-3">
   <strong>Thank You</strong><br> 
-  <span class="font-size-3 mt-0">(not in order of appearance)</span>
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
-  Voxxed Days Bucharest 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
+  OWASP AppSec EU 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
   <br/>
-  You wonderful people <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
-<div class="grid-item text-right mr-4 col-span-1"><strong>Slides</strong></div>
-<div class="grid-item col-span-2">
-Slidev<br/>
-Vue.js<br/>
-Pavel Romanov<br/>
-Karl Horky<br/>
-Wesley Todd<br/>
-Snyk<br/>
-</div>
+  You hackers and developers <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
 
 <div class="grid-item col-span-3 text-center mt-180px mb-auto font-size-1.5rem">
   <strong>Questions?</strong>
