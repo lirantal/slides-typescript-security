@@ -25,7 +25,7 @@ addons:
     Liran Tal
   </div>
   <span class="text-md text-yellow-500">
-    OWASP AppSec EU 🇪🇸
+    OWASP AppSec IL 🇮🇱
   </span>
 </div>
 
@@ -1865,7 +1865,7 @@ speed: 0.5
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
-  OWASP AppSec EU 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
+  OWASP AppSec IL 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
   <br/>
   You hackers and developers <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
 
