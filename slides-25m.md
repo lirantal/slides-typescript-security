@@ -25,7 +25,7 @@ addons:
     Liran Tal
   </div>
   <span class="text-md text-yellow-500">
-    JavaScript Israel 2025
+    WeAreDevelopers 2025 🇩🇪
   </span>
 </div>
 
@@ -57,7 +57,7 @@ class: text-center
 <div class="mt-10">
 
 <div>
-🤓 Developer |  🐢 Node.js Security Advocate  |  ☠️ Security Researcher
+🤓 Developer |  🐢 Node.js Security Advocate  | 😈 Security Researcher
 </div>
 
 <div class="mt-4 flex justify-center items-center">
@@ -102,6 +102,12 @@ found 3,141,527,818,921 vulnerabilities
 <div class="mt-2">
 🏆 OpenJS Foundation Pathfinder for Security Award
 </div>
+
+---
+layout: center
+---
+
+![marked-safe-from-ai](./images/marked-safe-from-ai.png)
 
 ---
 layout: center
@@ -163,10 +169,8 @@ Can you spot the issue?
 
   - Found in `dustjs-linkedin`
   - Downloaded 100,000 / month
-  - Let's appreciate that this was found as a blackbox test
 
   ![dustjs-linkedin npm package downloads](./images/dustjs-linkedin-npm-downloads.png)
-
 
 ---
 layout: center
@@ -201,38 +205,6 @@ layout: center
 </div>
 
 </div>
-
----
-layout: intro
-author: 'Liran Tal'
-color: purple-light
----
-
-<div class="h-full flex flex-col justify-center items-center">
-
-![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
-
-</div>
-
-<!-- 
-  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
--->
-
----
-layout: top-title
-color: amber-light
----
-
-:: title ::
-
-More than 50% of the time, developers rely on TypeScript alone for type-safety
-
-:: content ::
-
-<div class="ml-35">
-  <Tweet id="1883849641860710563"/>
-</div>
-
 
 ---
 layout: default
@@ -348,13 +320,13 @@ color: amber-light
 - TypeScript param types will be catching these
 
 <v-switch>
-  <template #1>
+  <template #0>
 
   ![typescript type checks for express route](./images/typescript-type-checks-for-express-route.png){width=80%}
 
   </template>
 
-  <template #2>
+  <template #1>
 
 ## Security promises:
 
@@ -735,7 +707,68 @@ $ curl -G -X 'GET'
 Congrats, you're a hacker! 👏
 </div>
 
+---
+layout: top-title-two-cols
+color: amber-light
+align: l-lt-lt
+---
 
+:: title ::
+
+A Secure React Server Component
+
+:: left ::
+
+See how `req.query.name` is typed via interface:
+
+```ts {6-10}
+public getUserHelloComponent: RequestHandler =
+    async ( _req: Request<{}, {}, {}, 
+            UserComponentQueryString>,
+     res: Response) => {
+
+      const userName = _req.query.name || "";
+
+      if (!sanitizeXSS(userName)) {
+        return res.status(400)
+                    .send("Bad input!");
+      }
+
+      const helloComponent = `<h1>Hello,
+        ${userName}!</h1>`;
+      return res.send(helloComponent);
+    }
+```
+
+:: right ::
+
+Now see how `name` would be an array. What happens with `.includes()` ?
+
+```ts
+function sanitizeXSS(name: string): boolean {
+  const disallowList = ["<", ">", "&", '"', 
+    "'", "/", "="];
+
+  return !disallowList.
+    some((badInput) => name.includes(badInput));
+}
+```
+
+---
+layout: side-title
+color: amber-light
+align: rm-lm
+---
+
+:: title ::
+
+# TypeScript Pitfalls
+
+:: content ::
+
+- ❌ Do not use the `any` TypeScript wildcard
+- ❌ TypeScript is "development-time" confidence, not "runtime" security
+- ❌ Do not rely on TypeScript alone for Type security
 
 ---
 layout: side-title
@@ -752,9 +785,6 @@ align: rm-lm
 - ❌ Some libraries are simply not typed
 - ❌ Some libraries are typed but are just wrongly typed
 - ❌ Some libraries are typed with "any". Goodluck 🙏
-- ❌ Do not use the `any` TypeScript wildcard
-- ❌ TypeScript is "development-time" confidence, not "runtime" security
-- ❌ Do not rely on TypeScript alone for Type security
 
 <!--
 __ TypeScript security fallacies __
@@ -772,14 +802,8 @@ So let's take a second to reflect on some of the TypeScript security fallacies w
 layout: cover
 ---
 
-<Tweet id="1883897466019590307"/>
+# Adding Security to TypeScript... ?
 
-<!--
-
-  This tweet demonstrates why having an adversarial mindset that TypeScript type system is not a security tool is so important
-
-  Developers put misplaced trust in TypeScript and exchange runtime security for test cases
--->
 
 ---
 layout: side-title
@@ -805,9 +829,9 @@ if (typeof filterQuery !== "string") {
 
 <v-click>
 
-- 👎 Con: you need to remember adding these type guards all the time
-- 👎 Con: your codebase might feel more "dirty" with all these type checks
-- 👎 Con: not all type guards are created equal (e.g: typeof `null` is `object` 😅)
+- 👎 need to remember adding these type guards all the time
+- 👎 codebase might feel more "dirty" with all these type checks
+- 👎 not all type guards are created equal (e.g: typeof `null` is `object` 😅)
 
 </v-click>
 
@@ -916,7 +940,7 @@ PUT /users/123/settings/notifications
 
 <v-click at="2">
 
-- ✅ Typed at **runtime** with with Zod
+- ✅ Typed at **runtime** with Zod
 
 </v-click>
 
@@ -928,7 +952,7 @@ PUT /users/123/settings/notifications
 
 :: right ::
 
-2. And the controller handler as follows:
+1. And the controller handler as follows:
 
 ```ts {all|3-6|11,14}
 public setUserNotificationSetting: RequestHandler = async 
@@ -1466,6 +1490,54 @@ layout: cover
 color: purple-light
 ---
 
+### TypeScript Security Insights 💎
+
+---
+layout: top-title
+color: amber-light
+---
+
+:: title ::
+
+More than 50% of the time, developers rely on TypeScript alone for type-safety
+
+:: content ::
+
+<div class="ml-35">
+  <Tweet id="1883849641860710563"/>
+</div>
+
+---
+layout: quote
+color: purple-light
+---
+
+## TypeScript does not give any security guarantees.
+
+<!--
+  It's a tool to help you write better code, but it's not a security tool
+-->
+
+---
+layout: intro
+color: purple-light
+---
+
+<div class="h-full flex flex-col justify-center items-center">
+
+![wesley todd about typescript security](./images/wesley-todd-about-typescript-security.png){width=95%}
+
+</div>
+
+<!-- 
+  TypeScript developers put misplaced trust in types in the same way that developers put misplaced trust in code coverage.
+-->
+
+---
+layout: cover
+color: purple-light
+---
+
 ### TypeScript Security Learnings 🧑‍🎓
 
 <div class="flex flex-row justify-center gap-16">
@@ -1499,6 +1571,12 @@ color: purple-light
 layout: center
 color: black
 ---
+
+<div class="h-full flex flex-col justify-center items-center">
+
+https://github.com/lirantal
+
+</div>
 
 <div>
 
@@ -1534,18 +1612,16 @@ speed: 0.5
 </div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Event</strong></div>
 <div class="grid-item col-span-2">
-  JavaScript Israel meetup <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
+  WeAreDevelopers 2025 🇩🇪 <i>as The organizer crew</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" />
   <br/>
   You wonderful people <i>as the "Audience"</i>&nbsp;<mdi-open-in-new class="font-size-3 mb-0.5" /></div>
 <div class="grid-item text-right mr-4 col-span-1"><strong>Slides</strong></div>
 <div class="grid-item col-span-2">
 Slidev<br/>
 Vue.js<br/>
-Pavel Romanov<br/>
 Karl Horky<br/>
 Wesley Todd<br/>
 Ariel Shulman<br/>
-Snyk<br/>
 </div>
 
 <div class="grid-item col-span-3 text-center mt-180px mb-auto font-size-1.5rem">
